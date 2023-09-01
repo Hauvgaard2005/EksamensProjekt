@@ -238,8 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d02217a883b8b146a02efc25028dfbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 8769791837565854637, guid: d6023ca9719f7d042bbc8ff87dd13268, type: 3}
+  health: 100
   speed: 3
+  projectilePrefab: {fileID: 8769791837565854637, guid: d6023ca9719f7d042bbc8ff87dd13268, type: 3}
 --- !u!50 &1325773032
 Rigidbody2D:
   serializedVersion: 4
