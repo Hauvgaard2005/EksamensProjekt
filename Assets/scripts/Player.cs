@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+
+    public float speed = 3.0f;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            MoveForward();
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            MoveBackward();
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            MoveLeft();
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            MoveRight();
+        }
+
+
+
+    }
+
+    private void MoveForward()
+    {
+        transform.Translate(Vector2.up * Time.deltaTime * speed);
+    }
+
+    private void MoveBackward()
+    {
+        transform.Translate(Vector2.down * Time.deltaTime * speed);
+    }
+
+    private void MoveLeft()
+    {
+        transform.Translate(Vector2.left * Time.deltaTime * speed);
+    }
+
+    private void MoveRight()
+    {
+        transform.Translate(Vector2.right * Time.deltaTime * speed);
+    }
+}
