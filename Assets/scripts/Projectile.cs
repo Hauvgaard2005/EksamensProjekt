@@ -20,7 +20,6 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.up * Time.deltaTime * 5f);
-        Destroy(gameObject, Range);
 
 
     }
