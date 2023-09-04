@@ -5,7 +5,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    public float health = 100f;
     public float speed = 3.0f;
+    int xp = 0;
+    int level = 1;
+    public Projectile projectilePrefab;
+
+    public Enemy Enemy;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +40,10 @@ public class Player : MonoBehaviour
         {
             MoveRight();
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnProjectile();
+        }
 
 
 
@@ -54,5 +67,26 @@ public class Player : MonoBehaviour
     private void MoveRight()
     {
         transform.Translate(Vector2.right * Time.deltaTime * speed);
+    }
+
+    private void SpawnProjectile()
+    {
+        Projectile projectile = Instantiate(projectilePrefab);
+        projectile.transform.position = transform.position;
+
+    }
+
+    private void Pickup()
+    {
+        xp += 1;
+    }
+
+    private void LvlUp()
+    {
+        if (xp >= 5 * level)
+        {
+            level += 1;
+            xp = 0;
+        }
     }
 }
