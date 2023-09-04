@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 
 
     public float damage = 5f;
-    public float range = 5f;
+    public float Range = 1f;
 
 
 
@@ -16,13 +16,8 @@ public class Projectile : MonoBehaviour
 
 
         transform.Translate(Vector2.up * Time.deltaTime * 5f);
+        Destroy(gameObject, Range);
 
-
-
-        if (transform.position.y > range)
-        {
-            DestroyProjectile();
-        }
 
     }
 
