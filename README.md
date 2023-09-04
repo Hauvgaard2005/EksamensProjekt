@@ -6,8 +6,11 @@ Når han leveler op kan han opgradere mellem; Range, Damage og Speed på hans v�
 
 ## Actors
 
-|ID|Player|Enemy|Projectile|
-|---|---|---|---|
+|ID|Actor|Description|
+|---|---|---|
+|0|Player|Spilleren som spiller spillet|
+|1|Enemy|Modstanderen som targeter playeren
+2|Projectile|Genstanden som skydes mod enemies
 
 ## MoSCoW
 - Player MUST shoot projectiles at Enemy
