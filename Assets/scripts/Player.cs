@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     int xp = 0;
     int level = 1;
     public Projectile projectilePrefab;
-
     public Enemy Enemy;
 
 
