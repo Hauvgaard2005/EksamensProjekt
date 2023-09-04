@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     int level = 1;
     public Projectile projectilePrefab;
 
+    public Enemy Enemy;
+
 
 
     // Start is called before the first frame update
