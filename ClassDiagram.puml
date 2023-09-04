@@ -1,0 +1,54 @@
+
+class Player{
+
++ float speed
++ float health
++ int xp
++ int lvl
+--
++ void Move(float, float)
++ void Shoot (Projectile projectile)
++ void TakeDamage(int Enemy.damage)
++ void LvlUp(int xp)
+- void PickUp(obejct xp)
+
+}
+
+class Enemy{
+- int speed
+- int health
+- int damage
+- Player target
+--
+- TargetPlayer(Player player)
+- TakeDamage(Projectile)
+
+}
+
+class Game{
++ int EnemyCount
+--
+- void startGame()
+- void Update()
++ Player spawnPlayer()
++ List<Enemy> SpawnEnemies()
+- void endGame()
+
+}
+
+class Projectile{
+
++ int damage
++ int speed
++ int range
++ Enemy target
+--
+- void Target(Enemy enemy)
+- void Die(int range)
+
+
+}
+
+Game-->Player
+Player-->Projectile
+Game-->Enemy
