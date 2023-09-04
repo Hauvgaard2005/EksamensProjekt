@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,19 +9,22 @@ public class Projectile : MonoBehaviour
 
     public float damage = 5f;
     public float Range = 1f;
-    public Enemy enemy;
+    [SerializeField] private GameObject target;
 
     void start()
     {
-        Vector2 displacement = enemy.transform.position - transform.position;
-        displacement = displacement.normalized;
+
+
 
     }
 
     void Update()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * 5f);
 
+        Vector3 displacement = target.transform.position - transform.position;
+        displacement = displacement.normalized;
+        transform.position += displacement * Time.deltaTime * 5f;
+        Destroy(gameObject, Range);
 
     }
 
@@ -30,3 +34,5 @@ public class Projectile : MonoBehaviour
     }
 
 }
+
+

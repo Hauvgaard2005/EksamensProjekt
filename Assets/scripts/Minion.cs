@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Minion : Enemy
@@ -17,5 +18,7 @@ public class Minion : Enemy
     void Update()
     {
 
+        MoveToPlayer();
+        Die();
     }
 }
