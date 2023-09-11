@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class Player : MonoBehaviour
     public Projectile projectilePrefab;
     [SerializeField] private Enemy Enemy;
     [SerializeField] private Collider2D playerCollider;
+    [SerializeField] private Collider2D projectileCollider;
+
+
+
 
 
 
@@ -50,11 +55,11 @@ public class Player : MonoBehaviour
             Collison();
         }
 
+
         if (health <= 0f)
         {
             Destroy(this.gameObject);
         }
-
 
 
 
@@ -83,7 +88,8 @@ public class Player : MonoBehaviour
     private void SpawnProjectile()
     {
         Projectile projectile = Instantiate(projectilePrefab);
-        projectile.transform.position = transform.position + transform.up;
+        projectile.transform.position = transform.position;
+
     }
 
     private void Collison()
