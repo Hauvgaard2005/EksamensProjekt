@@ -5,27 +5,41 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public float HP;
+    public float speed = 2;
+    public float damage;
+    [SerializeField] private GameObject Player;
+    [SerializeField] private Collider2D ProjectileCollider;
+    [SerializeField] private Collider2D EnemyCollider;
+
+
+  
+    public void MoveToPlayer()
     {
-        private float HP;
-        private float speed;
-        public float damage;
-        //er public transform ligemeget?
-        //public transform target;
+        transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);
+        transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+/*public void CollideWithProjectile()
     {
-        if(HP <= 0)
+         if (EnemyCollider.IsTouching(Projectile.GetComponent<Collider2D>()))
+        {
+            Collison();
+        }
+         if (playerCollider.IsTouching(Enemy.GetComponent<Collider2D>()))
+        {
+            Collison();
+        }
+  
+    }
+    */
+    public void Die()
+    {
+        if (HP <= 0)
         {
             Destroy(this.gameObject);
         }
-        vector3 displacement = Player.position -transform.position;
-        displacement = displacement.normalized;
-        if (Vector2.Distance (Player.position, transform.position) > 0f) {
-            transform.position += (displacement * speed * Time.deltaTime);
-                        
-        }
     }
+
+
 }

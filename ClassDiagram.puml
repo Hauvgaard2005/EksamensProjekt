@@ -1,54 +1,62 @@
 
 class Player{
 
-+ float speed
-+ float health
-+ int xp
-+ int lvl
---
-+ void Move(float, float)
-+ void Shoot (Projectile projectile)
-+ void TakeDamage(int Enemy.damage)
-+ void LvlUp(int xp)
-- void PickUp(obejct xp)
+    + float speed
+    + float health
+    + int xp
+    + int lvl
+
+    + void Move(float, float)
+    + void Shoot (Projectile projectile)
+    + void TakeDamage(int Enemy.damage)
+    + void LvlUp(int xp)
+    - void PickUp(obejct xp)
 
 }
 
 class Enemy{
-- int speed
-- int health
-- int damage
-- Player target
---
-- TargetPlayer(Player player)
-- TakeDamage(Projectile)
+    - int speed
+    - int health
+    - int damage
+    - Player target
+    --
+    - TargetPlayer(Player player)
+    - TakeDamage(Projectile)
+}
+
+class Minion{
 
 }
 
+
 class Game{
-+ int EnemyCount
---
-- void startGame()
-- void Update()
-+ Player spawnPlayer()
-+ List<Enemy> SpawnEnemies()
-- void endGame()
+    - [SerializeField] int EnemyCount
+    - [SerializeField] Gameobject playerPrefab
+    - [SerializeField] Gameobject enemyPrefab
+    - float spawnRadius
+    --
+    - void startGame()
+    - void Update()
+    + Player spawnPlayer()
+    - Enemy spawnEnemy()
+    - void endGame()
 
 }
 
 class Projectile{
 
-+ int damage
-+ int speed
-+ int range
-+ Enemy target
---
-- void Target(Enemy enemy)
-- void Die(int range)
+    + int damage
+    + int speed
+    + int range
+    + Enemy target
+    
+    - void Target(Enemy enemy)
+    - void Die(int range)
 
 
 }
 
-Game-->Player
-Player-->Projectile
-Game-->Enemy
+Game*--Player
+Player*--Projectile
+Game*--Enemy
+Minion-up-|>Enemy

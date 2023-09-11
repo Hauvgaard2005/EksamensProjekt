@@ -10,8 +10,8 @@ public class Player : MonoBehaviour
     int xp = 0;
     int level = 1;
     public Projectile projectilePrefab;
-
-    public Enemy Enemy;
+    [SerializeField] private Enemy Enemy;
+    [SerializeField] private Collider2D playerCollider;
 
 
 
@@ -45,6 +45,17 @@ public class Player : MonoBehaviour
             SpawnProjectile();
         }
 
+        if (playerCollider.IsTouching(Enemy.GetComponent<Collider2D>()))
+        {
+            Collison();
+        }
+
+        if (health <= 0f)
+        {
+            Destroy(this.gameObject);
+        }
+
+
 
 
     }
@@ -72,7 +83,13 @@ public class Player : MonoBehaviour
     private void SpawnProjectile()
     {
         Projectile projectile = Instantiate(projectilePrefab);
-        projectile.transform.position = transform.position;
+        projectile.transform.position = transform.position + transform.up;
+    }
+
+    private void Collison()
+    {
+        health -= 10f;
+
 
     }
 
