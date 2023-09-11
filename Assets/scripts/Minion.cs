@@ -17,7 +17,7 @@ public class Minion : Enemy
     // Update is called once per frame
     void Update()
     {
-
+        //CollideWithProjectile();
         MoveToPlayer();
         Die();
     }
