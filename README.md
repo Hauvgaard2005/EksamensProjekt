@@ -17,5 +17,7 @@ Når han leveler op kan han opgradere mellem; Range, Damage og Speed på hans v�
 - Enemy MUST be able to kill Player 
 - Player MUST level up
 - Projectiles MUST chance parameters based on levelup
+- Projectiles MUST target the enemy
+- The enemy MUST target the player 
 - Players COULD change parameters on levelup
 - Enemies COULD get stronger based on levelup
