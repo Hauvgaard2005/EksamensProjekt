@@ -6,9 +6,10 @@ public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public float HP;
-    public float speed;
+    public float speed = 2;
     public float damage;
-    public Transform PlayerTransform;
+    [SerializeField] private GameObject Player;
+
 
     void Start()
     {
@@ -19,16 +20,24 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
+
+
+
+
+    }
+
+    public void MoveToPlayer()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
+        transform.up = Player.transform.position - transform.position;
+    }
+
+    public void Die()
+    {
         if (HP <= 0)
         {
             Destroy(this.gameObject);
         }
-        Vector3 displacement = PlayerTransform.position - transform.position;
-        displacement = displacement.normalized;
-        if (Vector2.Distance(PlayerTransform.position, transform.position) > 0f)
-        {
-            transform.position += (displacement * speed * Time.deltaTime);
-
-        }
     }
+
 }
