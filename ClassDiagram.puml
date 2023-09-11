@@ -30,12 +30,15 @@ class Minion{
 
 
 class Game{
-    + int EnemyCount
+    - [SerializeField] int EnemyCount
+    - [SerializeField] Gameobject playerPrefab
+    - [SerializeField] Gameobject enemyPrefab
+    - float spawnRadius
     --
     - void startGame()
     - void Update()
     + Player spawnPlayer()
-    + List<Enemy> SpawnEnemies()
+    - Enemy spawnEnemy()
     - void endGame()
 
 }

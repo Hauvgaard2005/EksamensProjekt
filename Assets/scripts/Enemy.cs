@@ -16,8 +16,8 @@ public class Enemy : MonoBehaviour
   
     public void MoveToPlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
-        transform.up = Player.transform.position - transform.position;
+        transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);
+        transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
 /*public void CollideWithProjectile()
