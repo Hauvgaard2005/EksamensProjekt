@@ -20,5 +20,6 @@ public class Minion : Enemy
         //CollideWithProjectile();
         MoveToPlayer();
         Die();
+        CollideWithProjectile();
     }
 }

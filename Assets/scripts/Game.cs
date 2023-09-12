@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
 {
     public static Game Instance;
     [SerializeField] private GameObject enemyPrefab;
+    public Enemy spawnedEnemy;
     [SerializeField] private int numberOfEnemies = 5;
     private float spawnRadius = 100.0f;
 
@@ -50,6 +51,7 @@ public class Game : MonoBehaviour
 
         spawnEnemies();
 
+
     }
 
     void spawnEnemies()
@@ -60,7 +62,8 @@ public class Game : MonoBehaviour
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
             Vector3 randomSpawnPoint = new Vector3(randomCircle.x, randomCircle.y, 0) + Game.Instance.SpawnedPlayer.transform.position;
 
-            Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
+            GameObject go2 = Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
+            spawnedEnemy = go2.GetComponent<Enemy>();
         }
     }
 

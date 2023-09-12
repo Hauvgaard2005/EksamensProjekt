@@ -13,8 +13,7 @@ public class Player : MonoBehaviour
     int level = 1;
     public Projectile projectilePrefab;
     [SerializeField] private Enemy Enemy;
-    [SerializeField] private Collider2D playerCollider;
-    [SerializeField] private Collider2D projectileCollider;
+
 
     public Healthbar healthbar;
   
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour
             SpawnProjectile();
         }
 
-        if (playerCollider.IsTouching(Enemy.GetComponent<Collider2D>()))
+        if (Game.Instance.SpawnedPlayer.GetComponent<Collider2D>().IsTouching(Game.Instance.spawnedEnemy.GetComponent<Collider2D>()))
         {
             Collison();
         }
