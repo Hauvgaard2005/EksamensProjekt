@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public float health = 100f;
+    public float maxHealth = 100f;
+    public float currentHealth;
     public float speed = 3.0f;
     int xp = 0;
     int level = 1;
@@ -13,13 +14,26 @@ public class Player : MonoBehaviour
     [SerializeField] private Enemy Enemy;
     [SerializeField] private Collider2D playerCollider;
 
+    public Healthbar healthbar;
+  
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        currentHealth = maxHealth;
+        healthbar.SetHealth(currentHealth);
+
 
     }
+
+    public void TakeDamage(float damageAmount)
+    {
+        currentHealth -= damageAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        healthbar.SetHealth(currentHealth);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -50,7 +64,7 @@ public class Player : MonoBehaviour
             Collison();
         }
 
-        if (health <= 0f)
+        if (currentHealth <= 0f)
         {
             Destroy(this.gameObject);
         }
@@ -88,7 +102,7 @@ public class Player : MonoBehaviour
 
     private void Collison()
     {
-        health -= 10f;
+        currentHealth -= 10f;
 
 
     }
