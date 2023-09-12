@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
 
-        Vector3 displacement = target.transform.position - transform.position;
+        Vector3 displacement = Game.Instance.spawnedEnemy.transform.position - transform.position;
         displacement = displacement.normalized;
         transform.position += displacement * Time.deltaTime * 5f;
         Destroy(gameObject, Range);

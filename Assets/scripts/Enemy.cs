@@ -9,30 +9,25 @@ public class Enemy : MonoBehaviour
     public float speed = 2;
     public float damage;
     [SerializeField] private GameObject Player;
-    [SerializeField] private Collider2D ProjectileCollider;
-    [SerializeField] private Collider2D EnemyCollider;
+    [SerializeField] private Projectile projectile;
 
 
-  
+
     public void MoveToPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);
         transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
-/*public void CollideWithProjectile()
+    public void CollideWithProjectile()
     {
-         if (EnemyCollider.IsTouching(Projectile.GetComponent<Collider2D>()))
+        if (Game.Instance.spawnedEnemy.GetComponent<Collider2D>().IsTouching(projectile.GetComponent<Collider2D>()))
         {
-            Collison();
+            Destroy(this.gameObject);
         }
-         if (playerCollider.IsTouching(Enemy.GetComponent<Collider2D>()))
-        {
-            Collison();
-        }
-  
+
     }
-    */
+
     public void Die()
     {
         if (HP <= 0)
