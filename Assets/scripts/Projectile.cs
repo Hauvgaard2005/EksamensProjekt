@@ -7,31 +7,32 @@ public class Projectile : MonoBehaviour
 {
 
 
-    public float damage = 5f;
-    public float Range = 1f;
-    [SerializeField] private GameObject target;
+    public float damage = 20f;
+    Rigidbody2D rb;
 
     void start()
     {
 
-
+        rb = GetComponent<Rigidbody2D>();
 
     }
 
     void Update()
     {
-
         Vector3 displacement = Game.Instance.NearestEnemy.transform.position - transform.position;
         displacement = displacement.normalized;
         transform.position += displacement * Time.deltaTime * 5f;
-        Destroy(gameObject, Range);
-
+        Destroy(gameObject, Game.Instance.SpawnedPlayer.Range);
     }
 
-    private void DestroyProjectile()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (collision == Game.Instance.NearestEnemy.GetComponent<Collider2D>())
+        {
+            Destroy(gameObject);
+        }
     }
+
 
 }
 
