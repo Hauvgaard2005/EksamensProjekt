@@ -6,6 +6,8 @@ using UnityEngine;
 public class Minion : Enemy
 {
 
+    public float Health = 100f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,5 +22,6 @@ public class Minion : Enemy
         //CollideWithProjectile();
         MoveToPlayer();
         Die();
+        CollideWithProjectile();
     }
 }

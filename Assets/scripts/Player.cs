@@ -1,25 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
 
-    public float health = 100f;
+    public float maxHealth = 100f;
+    public float currentHealth;
     public float speed = 3.0f;
-    int gold = 0;
+    public int gold = 0;
     int level = 1;
     public Projectile projectilePrefab;
     [SerializeField] private Enemy Enemy;
-    [SerializeField] private Collider2D playerCollider;
+
+
+    public Healthbar healthbar;
+
+    //Projectile upgrades
+    public float damage = 5f;
+    public float Range = 1f;
+    public float reloadSpeed = 1f;
+
+
 
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        currentHealth = maxHealth;
+        healthbar.SetHealth(currentHealth);
+
 
     }
+
+    public void TakeDamage(float damageAmount)
+    {
+        currentHealth -= damageAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        healthbar.SetHealth(currentHealth);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -45,16 +67,15 @@ public class Player : MonoBehaviour
             SpawnProjectile();
         }
 
-        if (playerCollider.IsTouching(Enemy.GetComponent<Collider2D>()))
+        if (Game.Instance.SpawnedPlayer.GetComponent<Collider2D>().IsTouching(Game.Instance.spawnedEnemy.GetComponent<Collider2D>()))
         {
             Collison();
         }
 
-        if (health <= 0f)
+        if (currentHealth <= 0f)
         {
             Destroy(this.gameObject);
         }
-
 
 
 
@@ -83,18 +104,16 @@ public class Player : MonoBehaviour
     private void SpawnProjectile()
     {
         Projectile projectile = Instantiate(projectilePrefab);
-        projectile.transform.position = transform.position + transform.up;
+        projectile.transform.position = transform.position;
+
     }
 
     private void Collison()
     {
-        health -= 10f;
-
-
+        currentHealth -= 10f;
     }
 
-    public void AddGold(int amount)
-    {
-        gold += amount;
-    }
+
+
+
 }

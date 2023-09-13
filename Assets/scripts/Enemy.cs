@@ -5,35 +5,30 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float HP;
+    public float HP = 40;
     public float speed = 2;
     public float damage;
     public GameObject goldPrefab;
     [SerializeField] private GameObject Player;
-    [SerializeField] private Collider2D ProjectileCollider;
-    [SerializeField] private Collider2D EnemyCollider;
+    [SerializeField] private Projectile projectile;
 
 
-  
+
     public void MoveToPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);
         transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
-/*public void CollideWithProjectile()
+    public void CollideWithProjectile()
     {
-         if (EnemyCollider.IsTouching(Projectile.GetComponent<Collider2D>()))
+        if (Game.Instance.spawnedEnemy.GetComponent<Collider2D>().IsTouching(projectile.GetComponent<Collider2D>()))
         {
             Die();
         }
-         if (playerCollider.IsTouching(Enemy.GetComponent<Collider2D>()))
-        {
-            Collison();
-        }
-  
+
     }
-    */
+
     public void Die()
     {
         if (HP <= 0)
@@ -49,6 +44,8 @@ public class Enemy : MonoBehaviour
             //remove object from list
         }
     }
+
+    // method triggers on collision//
 
 
 }

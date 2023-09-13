@@ -131,5 +131,5 @@ MonoBehaviour:
   damage: 0
   goldPrefab: {fileID: 1491755151195621230, guid: 045e9db044e55334f8b713a2788e54bc, type: 3}
   Player: {fileID: 5579790997977117761, guid: eea925dadb6ee2747ac56f6af8fd3600, type: 3}
-  ProjectileCollider: {fileID: 0}
-  EnemyCollider: {fileID: 0}
+  projectile: {fileID: 8769791837565854637, guid: d6023ca9719f7d042bbc8ff87dd13268, type: 3}
+  EnemyCollider: {fileID: 8300651568450402572}
