@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Player : MonoBehaviour
     int level = 1;
     public Projectile projectilePrefab;
     [SerializeField] private Enemy Enemy;
-    [SerializeField] private Collider2D playerCollider;
+
 
     public Healthbar healthbar;
 
@@ -20,6 +21,10 @@ public class Player : MonoBehaviour
     public float damage = 5f;
     public float Range = 1f;
     public float reloadSpeed = 1f;
+
+
+
+
 
     // Start is called before the first frame update
     private void Start()
@@ -62,7 +67,7 @@ public class Player : MonoBehaviour
             SpawnProjectile();
         }
 
-        if (playerCollider.IsTouching(Enemy.GetComponent<Collider2D>()))
+        if (Game.Instance.SpawnedPlayer.GetComponent<Collider2D>().IsTouching(Game.Instance.spawnedEnemy.GetComponent<Collider2D>()))
         {
             Collison();
         }
@@ -71,7 +76,6 @@ public class Player : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
 
 
 
@@ -100,7 +104,8 @@ public class Player : MonoBehaviour
     private void SpawnProjectile()
     {
         Projectile projectile = Instantiate(projectilePrefab);
-        projectile.transform.position = transform.position + transform.up;
+        projectile.transform.position = transform.position;
+
     }
 
     private void Collison()

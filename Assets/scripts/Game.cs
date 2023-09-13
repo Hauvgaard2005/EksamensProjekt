@@ -7,13 +7,16 @@ public class Game : MonoBehaviour
 {
     public static Game Instance;
     [SerializeField] private GameObject enemyPrefab;
+    public Enemy spawnedEnemy;
     [SerializeField] private int numberOfEnemies = 5;
     private float spawnRadius = 100.0f;
+    List<Enemy> enemies;
 
     public RectTransform CanvasRect;
     public Player SpawnedPlayer;
     public GameObject playerPrefab;
     public GameObject healthBarPrefab;
+    public GameObject NearestEnemy;
 
     public void Awake()
     {
@@ -29,6 +32,8 @@ public class Game : MonoBehaviour
 
     public void Start()
     {
+
+        enemies = new List<Enemy>();
 
         GameObject go = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         SpawnedPlayer = go.GetComponent<Player>();
@@ -50,6 +55,13 @@ public class Game : MonoBehaviour
 
         spawnEnemies();
 
+
+    }
+
+    public void Update()
+    {
+        FindNearestEnemy();
+
     }
 
     void spawnEnemies()
@@ -60,13 +72,27 @@ public class Game : MonoBehaviour
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
             Vector3 randomSpawnPoint = new Vector3(randomCircle.x, randomCircle.y, 0) + Game.Instance.SpawnedPlayer.transform.position;
 
-            Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
+            GameObject go2 = Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
+            spawnedEnemy = go2.GetComponent<Enemy>();
+            enemies.Add(spawnedEnemy);
         }
     }
 
-
-    public void Update()
+    //find nearest enemy//
+    public void FindNearestEnemy()
     {
+        float distance = Mathf.Infinity;
+        Vector3 position = SpawnedPlayer.transform.position;
 
+        foreach (Enemy go in enemies)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                NearestEnemy = go.gameObject;
+                distance = curDistance;
+            }
+        }
     }
 }

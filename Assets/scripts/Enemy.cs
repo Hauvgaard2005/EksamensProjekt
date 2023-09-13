@@ -5,30 +5,27 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float HP;
+    public float HP = 40;
     public float speed = 2;
     public float damage;
+    [SerializeField] private GameObject Player;
+    [SerializeField] private Projectile projectile;
 
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-
-
-
-    }
 
     public void MoveToPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);
         transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
+    }
+
+    public void CollideWithProjectile()
+    {
+        if (Game.Instance.spawnedEnemy.GetComponent<Collider2D>().IsTouching(projectile.GetComponent<Collider2D>()))
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     public void Die()
@@ -38,5 +35,8 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    // method triggers on collision//
+
 
 }
