@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float HP;
+    public float HP = 40;
     public float speed = 2;
     public float damage;
     [SerializeField] private GameObject Player;
@@ -35,6 +35,8 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    // method triggers on collision//
 
 
 }

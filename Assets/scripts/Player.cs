@@ -11,12 +11,13 @@ public class Player : MonoBehaviour
     public float speed = 3.0f;
     int xp = 0;
     int level = 1;
+    public float Range = 1f;
     public Projectile projectilePrefab;
     [SerializeField] private Enemy Enemy;
 
 
     public Healthbar healthbar;
-  
+
 
 
 
