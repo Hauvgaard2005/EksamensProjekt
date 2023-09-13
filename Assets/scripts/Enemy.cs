@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public float HP;
     public float speed = 2;
     public float damage;
+    public GameObject xpPrefab;
     [SerializeField] private GameObject Player;
     [SerializeField] private Collider2D ProjectileCollider;
     [SerializeField] private Collider2D EnemyCollider;
@@ -24,7 +25,7 @@ public class Enemy : MonoBehaviour
     {
          if (EnemyCollider.IsTouching(Projectile.GetComponent<Collider2D>()))
         {
-            Collison();
+            Die();
         }
          if (playerCollider.IsTouching(Enemy.GetComponent<Collider2D>()))
         {
@@ -37,7 +38,13 @@ public class Enemy : MonoBehaviour
     {
         if (HP <= 0)
         {
+            //spawn Xp ting ting
+            Instantiate(xpPrefab, transform.position, Quaternion.identity);
+
+            //remove enemy
             Destroy(this.gameObject);
+            
+            //remove object from list
         }
     }
 
