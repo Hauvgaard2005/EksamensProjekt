@@ -6,9 +6,6 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-
-    public float damage = 5f;
-    public float Range = 1f;
     [SerializeField] private GameObject target;
 
     void start()
@@ -24,7 +21,7 @@ public class Projectile : MonoBehaviour
         Vector3 displacement = target.transform.position - transform.position;
         displacement = displacement.normalized;
         transform.position += displacement * Time.deltaTime * 5f;
-        Destroy(gameObject, Range);
+        Destroy(gameObject, Game.Instance.SpawnedPlayer.Range);
 
     }
 
