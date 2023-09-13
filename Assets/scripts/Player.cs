@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     public float health = 100f;
     public float speed = 3.0f;
-    int xp = 0;
+    int gold = 0;
     int level = 1;
     public Projectile projectilePrefab;
     [SerializeField] private Enemy Enemy;
@@ -93,17 +93,8 @@ public class Player : MonoBehaviour
 
     }
 
-    private void Pickup()
+    public void AddGold(int amount)
     {
-        xp += 1;
-    }
-
-    private void LvlUp()
-    {
-        if (xp >= 5 * level)
-        {
-            level += 1;
-            xp = 0;
-        }
+        gold += amount;
     }
 }

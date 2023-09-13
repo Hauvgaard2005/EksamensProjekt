@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public float HP;
     public float speed = 2;
     public float damage;
-    public GameObject xpPrefab;
+    public GameObject goldPrefab;
     [SerializeField] private GameObject Player;
     [SerializeField] private Collider2D ProjectileCollider;
     [SerializeField] private Collider2D EnemyCollider;
@@ -38,8 +38,10 @@ public class Enemy : MonoBehaviour
     {
         if (HP <= 0)
         {
-            //spawn Xp ting ting
-            Instantiate(xpPrefab, transform.position, Quaternion.identity);
+            //spawn Gold ting ting
+            GameObject go = Instantiate(goldPrefab, transform.position, Quaternion.identity);
+            Gold gold = go.GetComponent<Gold>();
+            gold.SetPickupDistance(gold.pickupDistance);
 
             //remove enemy
             Destroy(this.gameObject);
