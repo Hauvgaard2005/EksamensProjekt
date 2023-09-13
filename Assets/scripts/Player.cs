@@ -9,14 +9,18 @@ public class Player : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     public float speed = 3.0f;
-    int xp = 0;
+    public int gold = 0;
     int level = 1;
     public Projectile projectilePrefab;
     [SerializeField] private Enemy Enemy;
 
 
     public Healthbar healthbar;
-  
+
+    //Projectile upgrades
+    public float damage = 5f;
+    public float Range = 1f;
+    public float reloadSpeed = 1f;
 
 
 
@@ -107,21 +111,9 @@ public class Player : MonoBehaviour
     private void Collison()
     {
         currentHealth -= 10f;
-
-
     }
 
-    private void Pickup()
-    {
-        xp += 1;
-    }
 
-    private void LvlUp()
-    {
-        if (xp >= 5 * level)
-        {
-            level += 1;
-            xp = 0;
-        }
-    }
+
+
 }
