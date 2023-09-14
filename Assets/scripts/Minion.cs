@@ -12,7 +12,7 @@ public class Minion : Enemy
     void Start()
     {
         damage = 5f;
-        HP = 40;
+        HP = 15;
 
     }
 
