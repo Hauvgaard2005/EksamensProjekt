@@ -8,8 +8,6 @@ using Vector3 = UnityEngine.Vector3;
 public class Projectile : MonoBehaviour
 {
 
-
-    public float damage = 10f;
     Transform target;
 
     void Start()

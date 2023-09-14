@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float HP = 15;
+    public float HP;
     public float speed = 2;
     public float damage = 1;
     public GameObject goldPrefab;
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Projectile>() != null)
         {
-            HP -= projectile.damage;
+            HP -= Game.Instance.SpawnedPlayer.damage;
         }
 
     }
