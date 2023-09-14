@@ -20,9 +20,12 @@ public class Player : MonoBehaviour
     public Healthbar healthbar;
 
     //Projectile upgrades
-    public float damage = 5f;
-    public float Range = 1f;
-    public float reloadSpeed = 1f;
+    public float damage;
+    public float Range;
+    public float reloadSpeed;
+
+    float timer = 0.0f;
+
 
 
 
@@ -31,6 +34,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        damage = 5f;
+        Range = 5f;
+        reloadSpeed = 2f;
         currentHealth = maxHealth;
         healthbar.SetHealth(currentHealth);
 
@@ -41,6 +47,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        timer += Time.deltaTime;
+
+
         if (Input.GetKey(KeyCode.W))
         {
             MoveForward();
@@ -57,10 +67,6 @@ public class Player : MonoBehaviour
         {
             MoveRight();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnProjectile();
-        }
 
 
 
@@ -74,6 +80,11 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (timer >= reloadSpeed)
+        {
+            SpawnProjectile();
+            timer = 0.0f;
+        }
 
 
 
