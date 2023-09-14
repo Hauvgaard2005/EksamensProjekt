@@ -21,9 +21,9 @@ public class UpgradeManager : MonoBehaviour
         upgradeItems[1, 3] = 3;
 
         //Price
-        upgradeItems[2, 1] = 3;
-        upgradeItems[2, 2] = 5;
-        upgradeItems[2, 3] = 10;
+        upgradeItems[2, 0] = 3;
+        upgradeItems[2, 1] = 5;
+        upgradeItems[2, 2] = 10;
     }
 
     public void Upgrade()
@@ -38,6 +38,10 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    public void addGold(int amount){
+        gold += amount;
+        GoldTXT.text = "Gold: " + gold.ToString();
+    }
 
 
 }
