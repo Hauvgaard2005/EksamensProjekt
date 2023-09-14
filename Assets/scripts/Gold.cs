@@ -5,7 +5,6 @@ using UnityEngine;
 public class Gold : MonoBehaviour
 {
     public UpgradeManager upgradeManager;
-    public float pickupDistance = 5.0f;
     private CircleCollider2D CircleCollider2D;
 
     private float speed = 2.0f;
@@ -14,12 +13,13 @@ public class Gold : MonoBehaviour
     void Start()
     {
         CircleCollider2D = GetComponent<CircleCollider2D>();
-        SetPickupDistance(pickupDistance);
         upgradeManager = GameObject.FindObjectOfType<UpgradeManager>();
+        SetPickupDistance(Game.Instance.CurrentGoldRange);
     }
     // Update is called once per frame
     void Update()
     {
+
         if (ChaseTrigger)
         {
             transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);

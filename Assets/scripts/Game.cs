@@ -18,6 +18,10 @@ public class Game : MonoBehaviour
     public GameObject healthBarPrefab;
     public GameObject NearestEnemy;
 
+    //upgrades
+    public float CurrentGoldRange = 5f;
+
+
     public void Awake()
     {
         if (Instance == null)
