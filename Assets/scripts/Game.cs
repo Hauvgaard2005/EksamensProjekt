@@ -40,15 +40,12 @@ public class Game : MonoBehaviour
 
         Camera.main.transform.SetParent(SpawnedPlayer.transform);
 
+        //Canvas
         CanvasRect = GameObject.Find("Canvas").GetComponent<RectTransform>();
-
-        //Add healthbar to canvas
         GameObject healthBar = Instantiate(healthBarPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         healthBar.transform.SetParent(CanvasRect.transform, false);
-
-        //move healthbar to bottom left of screen
-        healthBar.transform.position = new Vector3(healthBar.transform.position.x + -115, healthBar.transform.position.y + -160, healthBar.transform.position.z);
-
+        healthBar.transform.position = new Vector3(healthBar.transform.position.x + 130, healthBar.transform.position.y + 20, healthBar.transform.position.z);
+        healthBar.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
         Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
         Game.Instance.SpawnedPlayer.healthbar = healthBar.GetComponent<Healthbar>();

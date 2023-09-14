@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gold : MonoBehaviour
 {
-
+    public UpgradeManager upgradeManager;
     public float pickupDistance = 5.0f;
     private CircleCollider2D CircleCollider2D;
 
@@ -13,9 +13,9 @@ public class Gold : MonoBehaviour
 
     void Start()
     {
-
         CircleCollider2D = GetComponent<CircleCollider2D>();
         SetPickupDistance(pickupDistance);
+        upgradeManager = GameObject.FindObjectOfType<UpgradeManager>();
     }
     // Update is called once per frame
     void Update()
@@ -27,6 +27,7 @@ public class Gold : MonoBehaviour
             {
                 Destroy(this.gameObject);
                 ChaseTrigger = false;
+                upgradeManager.addGold(1);
             }
             speed += 0.1f;
 
