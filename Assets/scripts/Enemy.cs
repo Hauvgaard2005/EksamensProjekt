@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
             //spawn Gold ting ting
             GameObject go = Instantiate(goldPrefab, transform.position, Quaternion.identity);
             Gold gold = go.GetComponent<Gold>();
-            gold.SetPickupDistance(gold.pickupDistance);
+            gold.SetPickupDistance(Game.Instance.CurrentGoldRange);
 
             //remove enemy
             Destroy(this.gameObject);
