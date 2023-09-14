@@ -20,28 +20,30 @@ public class Enemy : MonoBehaviour
         transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
-    public void CollideWithProjectile()
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (Game.Instance.spawnedEnemy.GetComponent<Collider2D>().IsTouching(projectile.GetComponent<Collider2D>()))
+        if (other.gameObject.GetComponent<Projectile>() != null)
         {
-            Die();
+            HP -= projectile.damage;
         }
 
     }
+
 
     public void Die()
     {
         if (HP <= 0)
         {
+
+            //remove enemy
+            Game.Instance.enemies.Remove(this);
+            Destroy(this.gameObject);
             //spawn Gold ting ting
             GameObject go = Instantiate(goldPrefab, transform.position, Quaternion.identity);
             Gold gold = go.GetComponent<Gold>();
             gold.SetPickupDistance(Game.Instance.CurrentGoldRange);
 
-            //remove enemy
-            Destroy(this.gameObject);
-            
-            //remove object from list
+
         }
     }
 

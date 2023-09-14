@@ -1,29 +1,51 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class Projectile : MonoBehaviour
 {
 
 
-    public float damage = 20f;
-    Rigidbody2D rb;
+    public float damage = 10f;
+    Transform target;
 
-    void start()
+    void Start()
     {
-
-        rb = GetComponent<Rigidbody2D>();
-
+        target = Game.Instance.NearestEnemy.transform;
     }
+
 
     void Update()
     {
-        Vector3 displacement = Game.Instance.NearestEnemy.transform.position - transform.position;
-        displacement = displacement.normalized;
-        transform.position += displacement * Time.deltaTime * 5f;
+
+        if (target != null)
+        {
+
+            if (target.gameObject.activeSelf)
+            {
+
+                Vector3 displacement = target.position - transform.position;
+                displacement = displacement.normalized;
+                transform.position += displacement * Time.deltaTime * 5f;
+
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         Destroy(gameObject, Game.Instance.SpawnedPlayer.Range);
+
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
