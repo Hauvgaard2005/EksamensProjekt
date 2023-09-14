@@ -26,7 +26,7 @@ public class Healthbar : MonoBehaviour
 
     private void UpdateHealthUI()
     {
-        healthBar.value = currentHealth / maxHealth;
+        healthBar.value = maxHealth / currentHealth;
         healthText.text = $"{currentHealth} / {maxHealth}";
     }
 

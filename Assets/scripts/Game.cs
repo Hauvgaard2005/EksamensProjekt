@@ -10,13 +10,17 @@ public class Game : MonoBehaviour
     public Enemy spawnedEnemy;
     [SerializeField] private int numberOfEnemies = 5;
     private float spawnRadius = 100.0f;
-    List<Enemy> enemies;
+    public List<Enemy> enemies = new List<Enemy>();
 
     public RectTransform CanvasRect;
     public Player SpawnedPlayer;
     public GameObject playerPrefab;
     public GameObject healthBarPrefab;
     public GameObject NearestEnemy;
+
+    //upgrades
+    public float CurrentGoldRange = 5f;
+
 
     public void Awake()
     {
@@ -33,7 +37,7 @@ public class Game : MonoBehaviour
     public void Start()
     {
 
-        enemies = new List<Enemy>();
+        
 
         GameObject go = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         SpawnedPlayer = go.GetComponent<Player>();
