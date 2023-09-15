@@ -10,7 +10,7 @@ public class UpgradeManager : MonoBehaviour
     public float[,] upgradeItems = new float[6, 6];
     public float curGold;
     public Text GoldTXT;
-    public Gold gold;
+
 
     public void Start()
     {
@@ -44,8 +44,8 @@ public class UpgradeManager : MonoBehaviour
 
             GoldTXT.text = "Gold: " + curGold.ToString();
             ButtonRef.GetComponent<ButtonInfo>().upgradeCost.text = upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID].ToString();
-           
-           //Upgrades (Husk at ændre længden af arrays hvis der tilføjes flere upgrades)
+
+            //Upgrades (Husk at ændre længden af arrays hvis der tilføjes flere upgrades)
             switch (ButtonRef.GetComponent<ButtonInfo>().upgradeID)
             {
                 case 0:
@@ -66,7 +66,12 @@ public class UpgradeManager : MonoBehaviour
                 case 3:
                     {
                         Game.Instance.CurrentGoldRange++;
-                        gold.SetPickupDistance(Game.Instance.CurrentGoldRange);
+
+                        foreach (Gold gold in FindObjectsOfType<Gold>())
+                        {
+                            gold.SetPickupDistance(Game.Instance.CurrentGoldRange);
+                        }
+
                         break;
                     }
                 case 4:
