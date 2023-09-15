@@ -5,9 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float HP = 40;
+    public float HP;
     public float speed = 2;
-    public float damage;
+    public float damage = 1;
     public GameObject goldPrefab;
     [SerializeField] private GameObject Player;
     [SerializeField] private Projectile projectile;
@@ -20,28 +20,30 @@ public class Enemy : MonoBehaviour
         transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
-    public void CollideWithProjectile()
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (Game.Instance.spawnedEnemy.GetComponent<Collider2D>().IsTouching(projectile.GetComponent<Collider2D>()))
+        if (other.gameObject.GetComponent<Projectile>() != null)
         {
-            Die();
+            HP -= Game.Instance.SpawnedPlayer.damage;
         }
 
     }
+
 
     public void Die()
     {
         if (HP <= 0)
         {
+
+            //remove enemy
+            Game.Instance.enemies.Remove(this);
+            Destroy(this.gameObject);
             //spawn Gold ting ting
             GameObject go = Instantiate(goldPrefab, transform.position, Quaternion.identity);
             Gold gold = go.GetComponent<Gold>();
             gold.SetPickupDistance(Game.Instance.CurrentGoldRange);
 
-            //remove enemy
-            Destroy(this.gameObject);
-            
-            //remove object from list
+
         }
     }
 
