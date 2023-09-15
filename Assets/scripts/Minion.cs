@@ -12,6 +12,7 @@ public class Minion : Enemy
     void Start()
     {
         damage = 5f;
+        HP = 15;
 
     }
 
@@ -20,6 +21,7 @@ public class Minion : Enemy
     {
         MoveToPlayer();
         Die();
-        CollideWithProjectile();
+
     }
+
 }
