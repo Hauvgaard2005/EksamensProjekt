@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Timers;
 
 public class Game : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class Game : MonoBehaviour
     //upgrades
     public float CurrentGoldRange = 5f;
 
+    //New Wave
+    private Timer timer;
+    public float waveTimer = 20000f; //20 seconds
 
     public void Awake()
     {
@@ -37,7 +41,7 @@ public class Game : MonoBehaviour
     public void Start()
     {
 
-        
+
 
         GameObject go = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         SpawnedPlayer = go.GetComponent<Player>();
@@ -54,7 +58,7 @@ public class Game : MonoBehaviour
         Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
         Game.Instance.SpawnedPlayer.healthbar = healthBar.GetComponent<Healthbar>();
 
-        spawnEnemies();
+        SpawnNewWave();
 
 
     }
@@ -65,9 +69,17 @@ public class Game : MonoBehaviour
 
     }
 
-    void spawnEnemies()
-    {
 
+    void EnemiesTimer()
+    {
+        //Opret timer
+        timer = new Timer(waveTimer);
+        timer.Elapsed += SpawnNewWave;
+        timer.AutoReset = true;
+        timer.Enabled = true;
+    }
+    void SpawnNewWave()
+    {
         for (int i = 0; i < numberOfEnemies; i++)
         {
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
@@ -77,6 +89,7 @@ public class Game : MonoBehaviour
             spawnedEnemy = go2.GetComponent<Enemy>();
             enemies.Add(spawnedEnemy);
         }
+        timer.Start();
     }
 
     //find nearest enemy//
