@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Timers;
+using System.Runtime.CompilerServices;
 
 public class Game : MonoBehaviour
 {
@@ -23,11 +24,13 @@ public class Game : MonoBehaviour
     public float CurrentGoldRange = 5f;
 
     //New Wave
-    private Timer timer;
-    public float waveTimer = 20000f; //20 seconds
+    public float waveTimer; //Timeren mellem waves
+    private float spawnInterval; //Intervallet mellem spawns
+    private float spawnTimer; //Timeren
+    public int waveDuration = 10; //Sekunder til næste wave
 
     public void Awake()
-    {
+    {  
         if (Instance == null)
         {
             Instance = this;
@@ -38,10 +41,8 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void Start()
+    void Start()
     {
-
-
 
         GameObject go = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         SpawnedPlayer = go.GetComponent<Player>();
@@ -60,37 +61,40 @@ public class Game : MonoBehaviour
 
         SpawnNewWave();
 
-
     }
 
     public void Update()
     {
         FindNearestEnemy();
+        if (spawnTimer <= 0)
+        {
+            for (int i = 0; i < numberOfEnemies; i++)
+            {
+                Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
+                Vector3 randomSpawnPoint = new Vector3(randomCircle.x, randomCircle.y, 0) + Game.Instance.SpawnedPlayer.transform.position;
 
+                GameObject go2 = Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
+                spawnedEnemy = go2.GetComponent<Enemy>();
+                enemies.Add(spawnedEnemy);
+                
+            }
+            spawnTimer = spawnInterval;
+        }
+        else
+        {
+            spawnTimer -= Time.deltaTime;
+            waveTimer -= Time.deltaTime;
+        }
     }
 
-
-    void EnemiesTimer()
-    {
-        //Opret timer
-        timer = new Timer(waveTimer);
-        timer.Elapsed += SpawnNewWave;
-        timer.AutoReset = true;
-        timer.Enabled = true;
-    }
     void SpawnNewWave()
     {
-        for (int i = 0; i < numberOfEnemies; i++)
-        {
-            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
-            Vector3 randomSpawnPoint = new Vector3(randomCircle.x, randomCircle.y, 0) + Game.Instance.SpawnedPlayer.transform.position;
+        spawnInterval = waveDuration;
+        waveTimer = waveDuration;
 
-            GameObject go2 = Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
-            spawnedEnemy = go2.GetComponent<Enemy>();
-            enemies.Add(spawnedEnemy);
-        }
-        timer.Start();
     }
+
+
 
     //find nearest enemy//
     public void FindNearestEnemy()

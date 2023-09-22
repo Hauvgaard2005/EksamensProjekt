@@ -790,9 +790,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788443a264a05da40a279533298b3bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 20
+  curGold: 0
   GoldTXT: {fileID: 1636362154}
-  gold: {fileID: 0}
 --- !u!1 &824230209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,7 +1654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8300651568450402610, guid: 56b5bba868721a0418245157c82a855a, type: 3}
   spawnedEnemy: {fileID: 0}
-  numberOfEnemies: 40
+  numberOfEnemies: 5
   enemies: []
   CanvasRect: {fileID: 0}
   SpawnedPlayer: {fileID: 0}
@@ -1663,6 +1662,8 @@ MonoBehaviour:
   healthBarPrefab: {fileID: 6883814383302558977, guid: 1065ed3e3c3872040a262cc227110ecd, type: 3}
   NearestEnemy: {fileID: 0}
   CurrentGoldRange: 5
+  waveTimer: 0
+  waveDuration: 10
 --- !u!4 &1739344485
 Transform:
   m_ObjectHideFlags: 0

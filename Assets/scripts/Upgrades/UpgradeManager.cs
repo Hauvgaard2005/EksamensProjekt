@@ -38,34 +38,34 @@ public class UpgradeManager : MonoBehaviour
         {
             curGold -= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID];
 
-            //Pris for Upgrades
-            upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
-
-
             GoldTXT.text = "Gold: " + curGold.ToString();
             ButtonRef.GetComponent<ButtonInfo>().upgradeCost.text = upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID].ToString();
 
             //Upgrades (Husk at ændre længden af arrays hvis der tilføjes flere upgrades)
             switch (ButtonRef.GetComponent<ButtonInfo>().upgradeID)
             {
-                case 0:
+                case 0: //Reload
                     {
                         Game.Instance.SpawnedPlayer.reloadSpeed *= 0.8f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
                         break;
                     }
-                case 1:
+                case 1: //Damage
                     {
-                        Game.Instance.SpawnedPlayer.damage *= 1.5f;
+                        Game.Instance.SpawnedPlayer.damage += 1.5f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 2f;
                         break;
                     }
-                case 2:
+                case 2: //Range
                     {
                         Game.Instance.SpawnedPlayer.Range += 2f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
                         break;
                     }
-                case 3:
+                case 3: //Gold Range
                     {
                         Game.Instance.CurrentGoldRange++;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
 
                         foreach (Gold gold in FindObjectsOfType<Gold>())
                         {
@@ -74,9 +74,10 @@ public class UpgradeManager : MonoBehaviour
 
                         break;
                     }
-                case 4:
+                case 4: //Speed
                     {
                         Game.Instance.SpawnedPlayer.speed *= 1.2f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
                         break;
                     }
 
