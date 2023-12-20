@@ -36,7 +36,7 @@ public class UpgradeManager : MonoBehaviour
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
         if (curGold >= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID])
         {
-            curGold -= Mathf.Ceil(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID]);
+            curGold -= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID];
 
             GoldTXT.text = "Gold: " + curGold.ToString();
             ButtonRef.GetComponent<ButtonInfo>().upgradeCost.text = Mathf.Ceil(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID]).ToString();
