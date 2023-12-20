@@ -36,10 +36,10 @@ public class UpgradeManager : MonoBehaviour
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
         if (curGold >= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID])
         {
-            curGold -= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID];
+            curGold -= Mathf.Ceil(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID]);
 
             GoldTXT.text = "Gold: " + curGold.ToString();
-            ButtonRef.GetComponent<ButtonInfo>().upgradeCost.text = upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID].ToString();
+            ButtonRef.GetComponent<ButtonInfo>().upgradeCost.text = Mathf.Ceil(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID]).ToString();
 
             //Upgrades (Husk at ændre længden af arrays hvis der tilføjes flere upgrades)
             switch (ButtonRef.GetComponent<ButtonInfo>().upgradeID)
@@ -47,25 +47,29 @@ public class UpgradeManager : MonoBehaviour
                 case 0: //Reload
                     {
                         Game.Instance.SpawnedPlayer.reloadSpeed *= 0.8f;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
                         break;
                     }
                 case 1: //Damage
                     {
                         Game.Instance.SpawnedPlayer.damage += 1.5f;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 2f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
                         break;
                     }
                 case 2: //Range
                     {
                         Game.Instance.SpawnedPlayer.Range += 2f;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
                         break;
                     }
                 case 3: //Gold Range
                     {
                         Game.Instance.CurrentGoldRange++;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
 
                         foreach (Gold gold in FindObjectsOfType<Gold>())
                         {
@@ -77,7 +81,8 @@ public class UpgradeManager : MonoBehaviour
                 case 4: //Speed
                     {
                         Game.Instance.SpawnedPlayer.speed *= 1.2f;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
+                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
                         break;
                     }
 
@@ -89,7 +94,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void addGold(int amount)
     {
-        curGold += amount;
+        curGold += Mathf.Round(amount);
         GoldTXT.text = "Gold: " + curGold.ToString();
     }
 
