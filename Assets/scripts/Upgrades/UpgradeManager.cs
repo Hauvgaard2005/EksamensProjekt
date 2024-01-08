@@ -39,10 +39,12 @@ public class UpgradeManager : MonoBehaviour
             curGold -= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID];
 
             //Pris for Upgrades
-            upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f;
+            upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = (int)upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] * 1.5f;
 
 
+            curGold = (int)curGold;
             GoldTXT.text = "Gold: " + curGold.ToString();
+
             ButtonRef.GetComponent<ButtonInfo>().upgradeCost.text = upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID].ToString();
 
             //Upgrades (Husk at ændre længden af arrays hvis der tilføjes flere upgrades)
@@ -55,7 +57,7 @@ public class UpgradeManager : MonoBehaviour
                     }
                 case 1:
                     {
-                        Game.Instance.SpawnedPlayer.damage *= 1.5f;
+                        Game.Instance.SpawnedPlayer.damage += 2.5f;
                         break;
                     }
                 case 2:
