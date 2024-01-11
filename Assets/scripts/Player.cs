@@ -18,9 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Enemy Enemy;
     private bool _invincible = false;
 
-    //dash//
 
-    //set this gameobjects rigidbody as a variable//
     public Rigidbody2D rb;
 
     public Healthbar healthbar;
@@ -28,7 +26,10 @@ public class Player : MonoBehaviour
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashSpeed = 10f;
-    [SerializeField] private float dashCooldown = 2f;
+    [SerializeField] private float dashCooldown;
+
+    //current stamina... use for UI?
+    [SerializeField] private float stamina = 3f;
     bool isDashing;
     UnityEngine.Vector2 moveDir;
 
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
         damage = 5f;
         Range = 5f;
         reloadSpeed = 2f;
+
         currentHealth = maxHealth;
         healthbar.SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
@@ -64,10 +66,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
 
         //get cur move direction
         moveDir = new UnityEngine.Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         timer += Time.deltaTime;
+        stamina += Time.deltaTime;
 
         //movement
         if (Input.GetKey(KeyCode.W))
@@ -89,7 +96,11 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(Dash(moveDir));
+            if (stamina >= dashCooldown)
+            {
+                StartCoroutine(Dash(moveDir));
+                stamina = 0.0f;
+            }
         }
 
         //health
@@ -139,12 +150,12 @@ public class Player : MonoBehaviour
 
     private IEnumerator Dash(UnityEngine.Vector2 moveDir)
     {
-        Debug.Log(moveDir);
         isDashing = true;
         Game.Instance.SpawnedPlayer.rb.AddForce(moveDir * dashSpeed, ForceMode2D.Impulse);
+        //set added force back to zero
         yield return new WaitForSeconds(dashTime);
+        Game.Instance.SpawnedPlayer.rb.velocity = UnityEngine.Vector2.zero;
         isDashing = false;
-        Debug.Log("Dash");
     }
 
     private void OnTriggerEnter(Collider other)
