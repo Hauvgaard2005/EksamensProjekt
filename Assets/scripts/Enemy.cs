@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public float HP;
-    public float speed = 2;
-    public float damage = 1;
+    public float speed;
+    public float damage;
     public GameObject goldPrefab;
     [SerializeField] private GameObject Player;
     [SerializeField] private Projectile projectile;
