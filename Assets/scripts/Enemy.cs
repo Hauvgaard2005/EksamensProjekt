@@ -6,9 +6,15 @@ public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public float HP;
+<<<<<<< HEAD
     public float speed;
     public float damage;
     public GameObject goldPrefab;
+=======
+    public float speed = 2;
+    public float damage = 1;
+    public GameObject soulPrefab;
+>>>>>>> origin/Waves
     [SerializeField] private GameObject Player;
     [SerializeField] private Projectile projectile;
 
@@ -38,10 +44,10 @@ public class Enemy : MonoBehaviour
             //remove enemy
             Game.Instance.enemies.Remove(this);
             Destroy(this.gameObject);
-            //spawn Gold ting ting
-            GameObject go = Instantiate(goldPrefab, transform.position, Quaternion.identity);
-            Gold gold = go.GetComponent<Gold>();
-            gold.SetPickupDistance(Game.Instance.CurrentGoldRange);
+            //spawn Soul ting ting
+            GameObject go = Instantiate(soulPrefab, transform.position, Quaternion.identity);
+            Soul soul = go.GetComponent<Soul>();
+            soul.SetPickupDistance(Game.Instance.CurrentSoulRange);
 
 
         }
