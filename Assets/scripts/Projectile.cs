@@ -28,6 +28,7 @@ public class Projectile : MonoBehaviour
                 Vector3 displacement = target.position - transform.position;
                 displacement = displacement.normalized;
                 transform.position += displacement * Time.deltaTime * 5f;
+                transform.right = target.transform.position - transform.position;
 
             }
             else

@@ -189,7 +189,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &202395968
 GameObject:
@@ -857,7 +857,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &521290205
 GameObject:
@@ -2096,7 +2096,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &807943846
 MonoBehaviour:
@@ -2110,8 +2110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788443a264a05da40a279533298b3bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curGold: 50000
-  GoldTXT: {fileID: 1636362154}
+  curSoul: 0
+  SoulTXT: {fileID: 1636362154}
 --- !u!1 &824230209
 GameObject:
   m_ObjectHideFlags: 0
@@ -25439,7 +25439,7 @@ GameObject:
   - component: {fileID: 1636362155}
   - component: {fileID: 1636362154}
   m_Layer: 5
-  m_Name: GoldTXT
+  m_Name: SoulTXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25478,7 +25478,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Gold: 0'
+  m_Text: 'Souls: 0'
 --- !u!222 &1636362155
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25589,7 +25589,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699541098
 GameObject:
@@ -25751,14 +25751,15 @@ MonoBehaviour:
   spawnedEnemy: {fileID: 0}
   numberOfEnemies: 5
   enemies: []
+  NearestEnemy: {fileID: 0}
   CanvasRect: {fileID: 0}
   SpawnedPlayer: {fileID: 0}
   playerPrefab: {fileID: 5579790997977117761, guid: eea925dadb6ee2747ac56f6af8fd3600, type: 3}
   healthBarPrefab: {fileID: 6883814383302558977, guid: 1065ed3e3c3872040a262cc227110ecd, type: 3}
-  NearestEnemy: {fileID: 0}
-  CurrentGoldRange: 5
-  waveTimer: 0
-  waveDuration: 10
+  CurrentSoulRange: 5
+  timer: 0
+  currentWave: 0
+  onEarth: 1
 --- !u!4 &1739344485
 Transform:
   m_ObjectHideFlags: 0
@@ -25772,7 +25773,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1785187991
 GameObject:
@@ -25817,7 +25818,7 @@ Transform:
   m_Children:
   - {fileID: 1362236615}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1803062690
 GameObject:
