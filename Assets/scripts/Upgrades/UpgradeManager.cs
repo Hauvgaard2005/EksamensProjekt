@@ -8,13 +8,13 @@ using UnityEngine.UI;
 public class UpgradeManager : MonoBehaviour
 {
     public float[,] upgradeItems = new float[6, 6];
-    public float curGold;
-    public Text GoldTXT;
+    public float curSoul;
+    public Text SoulTXT;
 
 
     public void Start()
     {
-        GoldTXT.text = "Gold: " + curGold.ToString();
+        SoulTXT.text = "Souls: " + curSoul.ToString();
 
         //ID's
         upgradeItems[1, 1] = 1;
@@ -34,55 +34,51 @@ public class UpgradeManager : MonoBehaviour
     public void Upgrade()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
-        if (curGold >= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID])
+        if (curSoul >= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID])
         {
-            curGold -= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID];
+            curSoul -= upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID];
 
-            GoldTXT.text = "Gold: " + curGold.ToString();
-            ButtonRef.GetComponent<ButtonInfo>().upgradeCost.text = Mathf.Ceil(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID]).ToString();
+            //Pris for Upgrades
+            upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = (int)upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] * 1.5f;
+
+
+            curSoul = (int)curSoul;
+            SoulTXT.text = "Souls: " + curSoul.ToString();
+
+            ButtonRef.GetComponent<ButtonInfo>().upgradeCost.text = upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID].ToString();
 
             //Upgrades (Husk at ændre længden af arrays hvis der tilføjes flere upgrades)
             switch (ButtonRef.GetComponent<ButtonInfo>().upgradeID)
             {
-                case 0: //Reload
+                case 0:
                     {
                         Game.Instance.SpawnedPlayer.reloadSpeed *= 0.8f;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
                         break;
                     }
-                case 1: //Damage
+                case 1:
                     {
-                        Game.Instance.SpawnedPlayer.damage += 1.5f;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
+                        Game.Instance.SpawnedPlayer.damage += 2.5f;
                         break;
                     }
-                case 2: //Range
+                case 2:
                     {
                         Game.Instance.SpawnedPlayer.Range += 2f;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
                         break;
                     }
-                case 3: //Gold Range
+                case 3:
                     {
-                        Game.Instance.CurrentGoldRange++;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
+                        Game.Instance.CurrentSoulRange++;
 
-                        foreach (Gold gold in FindObjectsOfType<Gold>())
+                        foreach (Soul soul in FindObjectsOfType<Soul>())
                         {
-                            gold.SetPickupDistance(Game.Instance.CurrentGoldRange);
+                            soul.SetPickupDistance(Game.Instance.CurrentSoulRange);
                         }
 
                         break;
                     }
-                case 4: //Speed
+                case 4:
                     {
                         Game.Instance.SpawnedPlayer.speed *= 1.2f;
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] = Mathf.Round(upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] *= 1.1f);
-                        upgradeItems[2, ButtonRef.GetComponent<ButtonInfo>().upgradeID] += 1;
                         break;
                     }
 
@@ -92,10 +88,10 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-    public void addGold(int amount)
+    public void addSouls(int amount)
     {
-        curGold += Mathf.Round(amount);
-        GoldTXT.text = "Gold: " + curGold.ToString();
+        curSoul += amount;
+        SoulTXT.text = "Souls: " + curSoul.ToString();
     }
 
 
