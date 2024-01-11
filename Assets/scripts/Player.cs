@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 using System;
+using UnityEditor;
+using UnityEditor.Callbacks;
+using System.Numerics;
 
 public class Player : MonoBehaviour
 {
@@ -10,16 +13,29 @@ public class Player : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     public float speed = 3.0f;
-    public int gold = 0;
     private bool isTakingDamage = false;
     public Projectile projectilePrefab;
     [SerializeField] private Enemy Enemy;
     private bool _invincible = false;
 
+    //dash//
+
+    //set this gameobjects rigidbody as a variable//
+    public Rigidbody2D rb;
 
     public Healthbar healthbar;
 
+    [Header("Dash Variables")]
+    [SerializeField] private float dashTime = 0.1f;
+    [SerializeField] private float dashSpeed = 10f;
+    [SerializeField] private float dashCooldown = 2f;
+    bool isDashing;
+    UnityEngine.Vector2 moveDir;
+
+
     //Projectile upgrades
+
+    [Header("Projectile Upgrades")]
     public float damage;
     public float Range;
     public float reloadSpeed;
@@ -39,6 +55,7 @@ public class Player : MonoBehaviour
         reloadSpeed = 2f;
         currentHealth = maxHealth;
         healthbar.SetHealth(currentHealth);
+        rb = GetComponent<Rigidbody2D>();
 
 
     }
@@ -48,9 +65,11 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+        //get cur move direction
+        moveDir = new UnityEngine.Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         timer += Time.deltaTime;
 
-
+        //movement
         if (Input.GetKey(KeyCode.W))
         {
             MoveForward();
@@ -68,18 +87,18 @@ public class Player : MonoBehaviour
             MoveRight();
         }
 
-
-
-        /*if (Game.Instance.SpawnedPlayer.GetComponent<Collider2D>().IsTouching(Game.Instance.spawnedEnemy.GetComponent<Collider2D>()))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Collison();
+            StartCoroutine(Dash(moveDir));
         }
-        */
+
+        //health
         if (currentHealth <= 0f)
         {
             Destroy(this.gameObject);
         }
 
+        //shooting
         if (timer >= reloadSpeed)
         {
             SpawnProjectile();
@@ -90,24 +109,25 @@ public class Player : MonoBehaviour
 
     }
 
+    //methods
     private void MoveForward()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * speed);
+        transform.Translate(UnityEngine.Vector2.up * Time.deltaTime * speed);
     }
 
     private void MoveBackward()
     {
-        transform.Translate(Vector2.down * Time.deltaTime * speed);
+        transform.Translate(UnityEngine.Vector2.down * Time.deltaTime * speed);
     }
 
     private void MoveLeft()
     {
-        transform.Translate(Vector2.left * Time.deltaTime * speed);
+        transform.Translate(UnityEngine.Vector2.left * Time.deltaTime * speed);
     }
 
     private void MoveRight()
     {
-        transform.Translate(Vector2.right * Time.deltaTime * speed);
+        transform.Translate(UnityEngine.Vector2.right * Time.deltaTime * speed);
     }
 
     private void SpawnProjectile()
@@ -115,6 +135,16 @@ public class Player : MonoBehaviour
         Projectile projectile = Instantiate(projectilePrefab);
         projectile.transform.position = transform.position;
 
+    }
+
+    private IEnumerator Dash(UnityEngine.Vector2 moveDir)
+    {
+        Debug.Log(moveDir);
+        isDashing = true;
+        Game.Instance.SpawnedPlayer.rb.AddForce(moveDir * dashSpeed, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(dashTime);
+        isDashing = false;
+        Debug.Log("Dash");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -139,7 +169,7 @@ public class Player : MonoBehaviour
             TakeDamage(enm.damage);
             print("col Taking damage");
             //apply force to player relative to collision
-            Vector2 force = transform.position - other.transform.position;
+            UnityEngine.Vector2 force = transform.position - other.transform.position;
             GetComponent<Rigidbody2D>().AddForce(force * 10f);
         }
         else

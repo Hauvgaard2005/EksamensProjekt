@@ -30,7 +30,7 @@ public class Game : MonoBehaviour
     public int waveDuration = 10; //Sekunder til næste wave
 
     public void Awake()
-    {  
+    {
         if (Instance == null)
         {
             Instance = this;
@@ -76,7 +76,7 @@ public class Game : MonoBehaviour
                 GameObject go2 = Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
                 spawnedEnemy = go2.GetComponent<Enemy>();
                 enemies.Add(spawnedEnemy);
-                
+
             }
             spawnTimer = spawnInterval;
         }
