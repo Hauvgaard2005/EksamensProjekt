@@ -22,6 +22,7 @@ public class Soul : MonoBehaviour
 
         if (ChaseTrigger)
         {
+            transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
             transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);
             if (Vector2.Distance(transform.position, Game.Instance.SpawnedPlayer.transform.position) < 0.1f)
             {
