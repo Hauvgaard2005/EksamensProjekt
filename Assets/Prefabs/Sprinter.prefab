@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2704165165377402715}
   - component: {fileID: 2882002439287849827}
   - component: {fileID: -6986338901870949000}
+  - component: {fileID: 2312591109401114332}
   m_Layer: 0
   m_Name: Sprinter
   m_TagString: Untagged
@@ -100,6 +101,32 @@ MonoBehaviour:
   HP: 0
   speed: 2
   damage: 1
-  goldPrefab: {fileID: 1491755151195621230, guid: 045e9db044e55334f8b713a2788e54bc, type: 3}
+  soulPrefab: {fileID: 0}
   Player: {fileID: 5579790997977117761, guid: eea925dadb6ee2747ac56f6af8fd3600, type: 3}
   projectile: {fileID: 8769791837565854637, guid: d6023ca9719f7d042bbc8ff87dd13268, type: 3}
+--- !u!61 &2312591109401114332
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4772871595370649457}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.3, y: 6}
+    newSize: {x: 5.3, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.7642193, y: 4.7372465}
+  m_EdgeRadius: 5

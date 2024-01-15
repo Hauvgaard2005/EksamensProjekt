@@ -5,15 +5,18 @@ using UnityEngine;
 using System.Timers;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+using System.Diagnostics;
 
 public class Game : MonoBehaviour
 {
     public static Game Instance;
 
     //Enemy Spawner
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject minionPrefab;
+    [SerializeField] private GameObject sprinterPrefab;
     public Enemy spawnedEnemy;
-    [SerializeField] private int numberOfEnemies = 5;
+    [SerializeField] private int numberOfMinions;
+    [SerializeField] private int numberOfSprinters;
     private float spawnRadius = 100.0f;
     public List<Enemy> enemies = new List<Enemy>();
 
@@ -65,8 +68,9 @@ public class Game : MonoBehaviour
 
         Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
         Game.Instance.SpawnedPlayer.healthbar = healthBar.GetComponent<Healthbar>();
-
+        print(currentWave);
         SpawnEnemies();
+        print(currentWave);
 
     }
 
@@ -88,19 +92,70 @@ public class Game : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        numberOfEnemies = currentWave * 2 + 5;
-        for (int i = 0; i < numberOfEnemies; i++)
+        print("spawn enemies function called");
+        switch (currentWave)
+        {
+            case 0:
+                numberOfMinions = 5;
+                break;
+            case 1:
+                numberOfMinions = 7;
+                break;
+            case 2:
+                numberOfMinions = 10;
+                numberOfSprinters = 2;
+                break;
+            case 3:
+                numberOfMinions = 15;
+                break;
+            case 4:
+                numberOfMinions = 20;
+                break;
+            case 5:
+                numberOfMinions = 25;
+                break;
+            case 6:
+                numberOfMinions = 30;
+                break;
+            case 7:
+                numberOfMinions = 35;
+                break;
+            case 8:
+                numberOfMinions = 40;
+                break;
+            case 9:
+                numberOfMinions = 45;
+                break;
+            case 10:
+                numberOfMinions = 50;
+                break;
+        }
+        print(numberOfMinions);
+        
+        for (int i = 0; i < numberOfMinions; i++)
         {
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
             Vector3 randomSpawnPoint = new Vector3(randomCircle.x, randomCircle.y, 0) + Game.Instance.SpawnedPlayer.transform.position;
 
-            GameObject go2 = Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
-            spawnedEnemy = go2.GetComponent<Enemy>();
+            GameObject go2 = Instantiate(minionPrefab, randomSpawnPoint, Quaternion.identity);
+            spawnedEnemy = go2.GetComponent<Minion>();
+            enemies.Add(spawnedEnemy);
+            print("spawned minion");
+
+        }
+        
+        for (int i = 0; i < numberOfSprinters; i++)
+        {
+            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
+            Vector3 randomSpawnPoint = new Vector3(randomCircle.x, randomCircle.y, 0) + Game.Instance.SpawnedPlayer.transform.position;
+
+            GameObject go2 = Instantiate(sprinterPrefab, randomSpawnPoint, Quaternion.identity);
+            spawnedEnemy = go2.GetComponent<Sprinter>();
             enemies.Add(spawnedEnemy);
 
         }
+        
     }
-
 
     //find nearest enemy//
     public void FindNearestEnemy()
@@ -119,4 +174,4 @@ public class Game : MonoBehaviour
             }
         }
     }
-}
+    }
