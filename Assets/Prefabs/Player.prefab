@@ -127,9 +127,9 @@ MonoBehaviour:
   Enemy: {fileID: 8300651568450402573, guid: 56b5bba868721a0418245157c82a855a, type: 3}
   rb: {fileID: 0}
   healthbar: {fileID: 6883814383302558983, guid: 1065ed3e3c3872040a262cc227110ecd, type: 3}
-  dashTime: 0.5
-  dashSpeed: 0.5
-  dashCooldown: 2
+  dashTime: 0.2
+  dashSpeed: 3
+  dashCooldown: 3
   damage: 5
   Range: 1
   reloadSpeed: 1
