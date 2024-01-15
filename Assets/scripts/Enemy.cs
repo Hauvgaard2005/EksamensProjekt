@@ -26,6 +26,10 @@ public class Enemy : MonoBehaviour
         {
             HP -= Game.Instance.SpawnedPlayer.damage;
         }
+        if (other.gameObject.GetComponent<SpecialAttack>() != null)
+        {
+            HP -= Game.Instance.SpawnedPlayer.damage * 1000;
+        }
 
     }
 
