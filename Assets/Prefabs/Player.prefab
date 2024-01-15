@@ -124,7 +124,7 @@ MonoBehaviour:
   currentHealth: 0
   speed: 3
   projectilePrefab: {fileID: 8769791837565854637, guid: d6023ca9719f7d042bbc8ff87dd13268, type: 3}
-  specialAttackPrefab: {fileID: 2553184467589380094, guid: c3b06509a7069cd44a7b80d5f756ae04, type: 3}
+  specialAttackPrefab: {fileID: 3968014468933012675, guid: 218991091cb1f6144ac83b8ce0708a4b, type: 3}
   Enemy: {fileID: 8300651568450402573, guid: 56b5bba868721a0418245157c82a855a, type: 3}
   rb: {fileID: 0}
   healthbar: {fileID: 6883814383302558983, guid: 1065ed3e3c3872040a262cc227110ecd, type: 3}
