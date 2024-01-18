@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    public Healthbar healthbar;
+    public PlayerUi healthbar;
 
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
