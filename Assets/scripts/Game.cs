@@ -20,12 +20,10 @@ public class Game : MonoBehaviour
 
     public GameObject NearestEnemy;
 
-    //hp bar
-    [Header("HP Bar")]
-    public RectTransform CanvasRect;
+
     public Player SpawnedPlayer;
     public GameObject playerPrefab;
-    public GameObject healthBarPrefab;
+
 
     //upgrades
     [Header("Upgrades")]
@@ -64,15 +62,9 @@ public class Game : MonoBehaviour
 
         Camera.main.transform.SetParent(SpawnedPlayer.transform);
 
-        //Canvas
-        CanvasRect = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        GameObject healthBar = Instantiate(healthBarPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        healthBar.transform.SetParent(CanvasRect.transform, false);
-        healthBar.transform.position = new Vector3(healthBar.transform.position.x + 130, healthBar.transform.position.y + 20, healthBar.transform.position.z);
-        healthBar.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
         Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
-        Game.Instance.SpawnedPlayer.healthbar = healthBar.GetComponent<Healthbar>();
+
 
         SpawnEnemies();
         onEarth = true;
@@ -112,7 +104,7 @@ public class Game : MonoBehaviour
         if (onEarth == false)
         {
             Hell.SetActive(true);
-        
+
 
         }
 

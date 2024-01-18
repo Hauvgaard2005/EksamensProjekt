@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     private bool _invincible = false;
 
 
-    public Healthbar healthbar;
+    public PlayerUi healthbar;
 
     //Projectile upgrades
     public float damage;

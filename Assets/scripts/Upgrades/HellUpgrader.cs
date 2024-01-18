@@ -83,7 +83,7 @@ public class HellUpgrader : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) addSouls(20);
+        if (Input.GetKeyDown(KeyCode.H)) addSouls(20);
         curSoul = (int)curSoul;
         SoulTXT.text = "Souls: " + curSoul.ToString();
 
