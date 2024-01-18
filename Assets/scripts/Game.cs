@@ -30,6 +30,7 @@ public class Game : MonoBehaviour
     //upgrades
     [Header("Upgrades")]
     public float CurrentSoulRange = 5f;
+    public GameObject Hell; //Canvas for upgrades
 
     //Wave
     private float hellDuration = 10f;
@@ -91,6 +92,7 @@ public class Game : MonoBehaviour
             currentWave++;
             hellTimer = 0;
             onEarth = true;
+            Hell.SetActive(false);
             SpawnEnemies();
             pickupTimer = 0;
         }
@@ -106,6 +108,14 @@ public class Game : MonoBehaviour
                 onEarth = false;
             }
         }
+
+        if (onEarth == false)
+        {
+            Hell.SetActive(true);
+        
+
+        }
+
     }
 
     public void SpawnEnemies()
