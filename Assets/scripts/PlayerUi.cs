@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerUi : MonoBehaviour
 {
     public float curHealth;
-    private float lerpTimer;
+    public float lerpTimer;
     public float maxHealth = 100f;
     public Image healthBar;
     public Image staminaBar;
@@ -26,7 +26,7 @@ public class PlayerUi : MonoBehaviour
         UpdateHealthUI();
     }
 
-    private void UpdateHealthUI()
+    public void UpdateHealthUI()
     {
         
     }

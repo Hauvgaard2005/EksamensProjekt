@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    public PlayerUi healthbar;
+    public PlayerUi playerUi;
 
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         reloadSpeed = 2f;
 
         currentHealth = maxHealth;
-        healthbar.SetHealth(currentHealth);
+        playerUi.SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
 
 
@@ -66,6 +66,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //midlertidig manuel damage
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            TakeDamage(10f);
+        }
+
         if (isDashing)
         {
             return;
@@ -205,8 +211,10 @@ public class Player : MonoBehaviour
             currentHealth -= damageAmount;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            healthbar.SetHealth(currentHealth);
+            playerUi.SetHealth(currentHealth);
             StartCoroutine(InvincibilityFrames());
+            playerUi.UpdateHealthUI();
+            playerUi.lerpTimer = 0f;
         }
 
     }
