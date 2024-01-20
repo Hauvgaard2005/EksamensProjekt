@@ -81,6 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   range: 5
+  SplashRange: 3
+  SplashDamage: 15
 --- !u!212 &8857517532977873152
 SpriteRenderer:
   m_ObjectHideFlags: 0

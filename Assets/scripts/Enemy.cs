@@ -20,17 +20,14 @@ public class Enemy : MonoBehaviour
         transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
+
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Projectile>() != null)
         {
             HP -= Game.Instance.SpawnedPlayer.damage;
         }
-        if (other.gameObject.GetComponent<SpecialAttack>() != null)
-        {
-            HP -= Game.Instance.SpawnedPlayer.damage * 1000;
-        }
-
     }
 
 

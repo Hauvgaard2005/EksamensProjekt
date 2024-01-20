@@ -94,5 +94,11 @@ public class UpgradeManager : MonoBehaviour
         SoulTXT.text = "Souls: " + curSoul.ToString();
     }
 
+    public void removeSouls(int amount)
+    {
+        curSoul -= amount;
+        SoulTXT.text = "Souls: " + curSoul.ToString();
+    }
+
 
 }
