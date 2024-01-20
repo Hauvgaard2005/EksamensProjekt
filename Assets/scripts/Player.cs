@@ -21,8 +21,7 @@ public class Player : MonoBehaviour
 
 
     public Rigidbody2D rb;
-
-    private UpgradeManager upgradeManager;
+    private HellUpgrader upgradeManager;
     public PlayerUi healthbar;
 
     [Header("Dash Variables")]
@@ -60,7 +59,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         healthbar.SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
-        upgradeManager = GameObject.FindObjectOfType<UpgradeManager>();
+        upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
 
 
     }
@@ -121,7 +120,7 @@ public class Player : MonoBehaviour
             timer = 0.0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && upgradeManager.curSoul >= 1)
+        if (Input.GetKeyDown(KeyCode.Space) && upgradeManager.curSoul >= specialAttackPrefab.cost)
         {
             SpecialAttack();
         }

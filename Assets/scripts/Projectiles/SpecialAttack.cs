@@ -6,7 +6,7 @@ public class SpecialAttack : MonoBehaviour
 {
     private Vector2 mousePos;
     private Rigidbody2D rb;
-    private UpgradeManager upgradeManager;
+    private HellUpgrader upgradeManager;
 
     public float speed = 10f;
     public float range = 5f;
@@ -25,7 +25,7 @@ public class SpecialAttack : MonoBehaviour
         Debug.Log(mousePos);
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = (mousePos - (Vector2)transform.position).normalized * speed;
-        upgradeManager = GameObject.FindObjectOfType<UpgradeManager>();
+        upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
         upgradeManager.removeSouls(cost);
 
     }
