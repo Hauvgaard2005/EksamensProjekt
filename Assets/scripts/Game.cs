@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
     public static Game Instance;
 
     //Enemy Spawner
+    [Header("Enemy Spawner")]
     [SerializeField] private GameObject enemyPrefab;
     public Enemy spawnedEnemy;
     [SerializeField] private int numberOfEnemies = 5;
@@ -19,22 +20,26 @@ public class Game : MonoBehaviour
 
     public GameObject NearestEnemy;
 
-    //hp bar
-    public RectTransform CanvasRect;
+
     public Player SpawnedPlayer;
     public GameObject playerPrefab;
-    public GameObject healthBarPrefab;
+
 
     //upgrades
+    [Header("Upgrades")]
     public float CurrentSoulRange = 5f;
+    public GameObject Hell; //Canvas for upgrades
 
-    //New Wave
-    private float waveDuration = 10f;
-    public float timer = 0f;
+    //Wave
+    private float hellDuration = 10f;
+    [Header("Wave")]
+    public float hellTimer = 0f;
     public int currentWave = 0;
-
-    //Day/Night
     public bool onEarth = true;
+    private float pickupDuration = 5f;
+    public float pickupTimer = 0f;
+
+
 
     public void Awake()
     {
@@ -46,6 +51,7 @@ public class Game : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
     }
 
     void Start()
@@ -56,32 +62,50 @@ public class Game : MonoBehaviour
 
         Camera.main.transform.SetParent(SpawnedPlayer.transform);
 
-        //Canvas
-        CanvasRect = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        GameObject healthBar = Instantiate(healthBarPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        healthBar.transform.SetParent(CanvasRect.transform, false);
-        healthBar.transform.position = new Vector3(healthBar.transform.position.x + 130, healthBar.transform.position.y + 20, healthBar.transform.position.z);
-        healthBar.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
         Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
-        Game.Instance.SpawnedPlayer.healthbar = healthBar.GetComponent<Healthbar>();
+
 
         SpawnEnemies();
+        onEarth = true;
 
     }
 
     public void Update()
     {
-        //Wave
-        timer += Time.deltaTime;
+        //Upgrade Wave
+        if (onEarth == false)
+        {
+            hellTimer += Time.deltaTime;
+        }
+
+        if (hellTimer >= hellDuration)
+        {
+            currentWave++;
+            hellTimer = 0;
+            onEarth = true;
+            Hell.SetActive(false);
+            SpawnEnemies();
+            pickupTimer = 0;
+        }
 
         //Enemy Spawner
         FindNearestEnemy();
-        if (timer >= waveDuration)
+        if (enemies.Count == 0)
         {
-            currentWave++;
-            timer = 0;
-            SpawnEnemies();
+            pickupTimer += Time.deltaTime;
+            if (pickupTimer >= pickupDuration)
+            {
+                pickupTimer = 0;
+                onEarth = false;
+            }
+        }
+
+        if (onEarth == false)
+        {
+            Hell.SetActive(true);
+
+
         }
 
     }

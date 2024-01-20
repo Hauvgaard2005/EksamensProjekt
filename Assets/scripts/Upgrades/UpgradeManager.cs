@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpgradeManager : MonoBehaviour
+/*public class UpgradeManager : MonoBehaviour
 {
     public float[,] upgradeItems = new float[6, 6];
     public float curSoul;
@@ -26,7 +26,7 @@ public class UpgradeManager : MonoBehaviour
         //Price
         upgradeItems[2, 0] = 3;
         upgradeItems[2, 1] = 5;
-        upgradeItems[2, 2] = 10;
+        upgradeItems[2, 2] = 4;
         upgradeItems[2, 3] = 3;
         upgradeItems[2, 4] = 5;
     }
@@ -101,4 +101,4 @@ public class UpgradeManager : MonoBehaviour
     }
 
 
-}
+}*/
