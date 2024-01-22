@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public float speed = 3.0f;
     private bool isTakingDamage = false;
     public Projectile projectilePrefab;
+    public SpecialAttack specialAttackPrefab;
     [SerializeField] private Enemy Enemy;
     private bool _invincible = false;
 
@@ -60,7 +61,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         playerUi.SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
-        
+        upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
 
 
     }
@@ -103,7 +104,9 @@ public class Player : MonoBehaviour
             MoveRight();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        //dash
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (stamina >= dashCooldown)
             {
@@ -124,6 +127,13 @@ public class Player : MonoBehaviour
             SpawnProjectile();
             timer = 0.0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) && upgradeManager.curSoul >= specialAttackPrefab.cost)
+        {
+            SpecialAttack();
+        }
+
+
 
         //stops when colliding with tag water collider
         if (TerrainCollider.IsTouching(GetComponent<Collider2D>()) == true)
@@ -158,6 +168,11 @@ public class Player : MonoBehaviour
         Projectile projectile = Instantiate(projectilePrefab);
         projectile.transform.position = transform.position;
 
+    }
+    private void SpecialAttack()
+    {
+        SpecialAttack specialAttack = Instantiate(specialAttackPrefab);
+        specialAttack.transform.position = transform.position;
     }
 
     private IEnumerator Dash(UnityEngine.Vector2 moveDir)
