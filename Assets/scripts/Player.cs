@@ -18,10 +18,12 @@ public class Player : MonoBehaviour
     [SerializeField] private Enemy Enemy;
     private bool _invincible = false;
 
-
+    public Collider2D TerrainCollider = FindObjectOfType<EdgeCollider2D>();
     public Rigidbody2D rb;
 
     public Healthbar healthbar;
+
+    
 
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
@@ -58,6 +60,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         healthbar.SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
+        
 
 
     }
@@ -116,8 +119,11 @@ public class Player : MonoBehaviour
             timer = 0.0f;
         }
 
-
-
+        //stops when colliding with tag water collider
+        if (TerrainCollider.IsTouching(GetComponent<Collider2D>()) == true)
+        {
+            speed = 0f;
+        }
     }
 
     //methods
