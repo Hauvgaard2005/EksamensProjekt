@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Soul : MonoBehaviour
 {
-    public UpgradeManager upgradeManager;
+    public HellUpgrader hellUpgrader;
     private CircleCollider2D CircleCollider2D;
 
     private float speed = 2.0f;
@@ -13,7 +13,7 @@ public class Soul : MonoBehaviour
     void Start()
     {
         CircleCollider2D = GetComponent<CircleCollider2D>();
-        upgradeManager = GameObject.FindObjectOfType<UpgradeManager>();
+        hellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
         SetPickupDistance(Game.Instance.CurrentSoulRange);
     }
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class Soul : MonoBehaviour
             {
                 Destroy(this.gameObject);
                 ChaseTrigger = false;
-                upgradeManager.addSouls(1);
+                hellUpgrader.addSouls(1);
             }
             speed += 0.1f;
 
