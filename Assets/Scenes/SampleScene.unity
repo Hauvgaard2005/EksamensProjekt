@@ -26407,9 +26407,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b0de66e4a467a49911d65179ec2220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8300651568450402610, guid: 56b5bba868721a0418245157c82a855a, type: 3}
+  minionPrefab: {fileID: 8300651568450402610, guid: 56b5bba868721a0418245157c82a855a, type: 3}
+  sprinterPrefab: {fileID: 4772871595370649457, guid: 09b7dd41981560344bd310ce613b17fa, type: 3}
   spawnedEnemy: {fileID: 0}
-  numberOfEnemies: 5
+  numberOfMinions: 0
+  numberOfSprinters: 0
   enemies: []
   NearestEnemy: {fileID: 0}
   SpawnedPlayer: {fileID: 0}

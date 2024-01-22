@@ -67,7 +67,7 @@ public class Game : MonoBehaviour
 
 
         Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
-        Game.Instance.SpawnedPlayer.healthbar = healthBar.GetComponent<Healthbar>();
+        
         print(currentWave);
         SpawnEnemies();
         print(currentWave);
