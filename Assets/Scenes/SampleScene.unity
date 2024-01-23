@@ -572,7 +572,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -790,6 +790,7 @@ GameObject:
   - component: {fileID: 549303004}
   - component: {fileID: 549303006}
   - component: {fileID: 549303005}
+  - component: {fileID: 549303007}
   m_Layer: 0
   m_Name: Tilemap_Rock
   m_TagString: Untagged
@@ -853,7 +854,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1906,6 +1907,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!68 &549303007
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549303003}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -22.292809, y: -9.687501}
+  - {x: -22.320799, y: -4.912839}
+  - {x: -21.021835, y: -4.316175}
+  - {x: -15.01008, y: -4.2741547}
+  - {x: -13.618767, y: -4.9430385}
+  - {x: -13.647896, y: -10.285392}
+  - {x: -14.355106, y: -11.553879}
+  - {x: -19.48641, y: -11.904644}
+  - {x: -20.356083, y: -11.14625}
+  - {x: -20.702633, y: -9.774532}
+  - {x: -22.249437, y: -9.704555}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &574398824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,6 +2803,7 @@ GameObject:
   - component: {fileID: 1362236615}
   - component: {fileID: 1362236617}
   - component: {fileID: 1362236616}
+  - component: {fileID: 1362236618}
   m_Layer: 0
   m_Name: Tilemap_Base
   m_TagString: Untagged
@@ -2834,7 +2867,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -25445,6 +25478,33 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!68 &1362236618
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362236614}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.8206787, y: 3.0946207}
+  - {x: -1.1602411, y: 9.015562}
+  - {x: -5.967086, y: 9.021029}
+  - {x: -5.912079, y: 14.880419}
+  - {x: 9.954994, y: 14.890424}
+  - {x: 9.869774, y: 2.9261098}
+  - {x: -0.53854823, y: 3.1477327}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1375313725
 GameObject:
   m_ObjectHideFlags: 0
@@ -26137,7 +26197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1673709278
 SpriteRenderer:
   m_ObjectHideFlags: 0
