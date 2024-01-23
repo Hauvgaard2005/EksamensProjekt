@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4076be9f78aeebe40a2ed460eccb6e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
+  HP: 5
   speed: 2
   damage: 1
   soulPrefab: {fileID: 0}

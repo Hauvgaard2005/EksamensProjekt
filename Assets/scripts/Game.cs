@@ -130,6 +130,7 @@ public class Game : MonoBehaviour
                 break;
             case 3:
                 numberOfMinions = 15;
+                numberOfSprinters = 5;
                 break;
             case 4:
                 numberOfMinions = 20;

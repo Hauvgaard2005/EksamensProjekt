@@ -9,7 +9,7 @@ public class Sprinter : Enemy
     void Start()
     {
         damage = 10f;
-        HP = 5;
+        HP = 5f;
         speed = 4f;
 
     }
