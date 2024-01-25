@@ -8,6 +8,7 @@ public class Sprinter : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         damage = 10f;
         HP = 5f;
         speed = 4f;
@@ -19,6 +20,7 @@ public class Sprinter : Enemy
     {
         MoveToPlayer();
         Die();
+        FlipSprite();
 
     }
 

@@ -12,12 +12,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject Player;
     [SerializeField] private Projectile projectile;
 
+    public SpriteRenderer spriteRenderer;
 
 
     public void MoveToPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);
-        transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
+
+        //transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
 
@@ -48,7 +50,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // method triggers on collision//
-
+        public void FlipSprite(){
+    //flips x value of sprite to face player
+        if(transform.position.x > Game.Instance.SpawnedPlayer.transform.position.x)
+        {
+            //if player is to the left, flip sprite
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            //if player is to the right, flip sprite
+            spriteRenderer.flipX = false;
+        }
+        }
 
 }

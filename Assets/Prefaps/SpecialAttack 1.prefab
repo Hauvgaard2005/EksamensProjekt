@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   range: 5
+  cost: 1
   SplashRange: 3
   SplashDamage: 15
 --- !u!212 &8857517532977873152
@@ -123,7 +124,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: d1b3cba3ad105d64880012458f29832d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using System;
 using UnityEditor;
-using UnityEditor.Callbacks;
+//using UnityEditor.Callbacks;
 using System.Numerics;
 
 public class Player : MonoBehaviour
@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
         playerUi.SetHealth(currentHealth);
-
     }
 
 
