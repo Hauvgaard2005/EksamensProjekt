@@ -71,7 +71,7 @@ public class HellUpgrader : MonoBehaviour
         //Styrer hvilke lines der er connected til hvad
         //Eksempelvis hvis den først upgrade i listen var connected til 4, 5, 6 upgrade "UpgradeList[0].ConnectedUpgrades = new int[] { 3, 4, 5 };"
         UpgradeList[0].ConnectedUpgrades = new[] { 1, 2 };
-    
+
 
 
         UpdateAllUpgradeUI();
@@ -97,5 +97,10 @@ public class HellUpgrader : MonoBehaviour
         SoulTXT.text = "Souls: " + curSoul.ToString();
         UpdateAllUpgradeUI();
     }
-
+    public void removeSouls(int amount)
+    {
+        curSoul -= amount;
+        SoulTXT.text = "Souls: " + curSoul.ToString();
+        UpdateAllUpgradeUI();
+    }
 }
