@@ -7,13 +7,21 @@ using UnityEngine.UI;
 
 public class PlayerUi : MonoBehaviour
 {
+    public Player player;
     public float curHealth;
     public float lerpTimer;
-    public float chipSpeed = 0.5f;
+    public float chipSpeed = 20f;
     public float maxHealth = 100f;
+    public float maxStamina = 3f;
+
     public Image frontHealthBar;
     public Image backHealthBar;
     public Image staminaBar;
+
+    float fillF;
+    float fillB;
+    float hFraction;
+    float fillS;
 
     public void Start()
     {
@@ -21,22 +29,27 @@ public class PlayerUi : MonoBehaviour
         backHealthBar = GameObject.FindGameObjectWithTag("BackHealthBar").GetComponent<Image>();
         staminaBar = GameObject.FindGameObjectWithTag("StaminaBar").GetComponent<Image>();
         curHealth = maxHealth;
-        UpdateHealthUI();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+
+        UpdatePlayerUi(curHealth);
     }
 
     public void SetHealth(float currentHealth)
     {
-        maxHealth = curHealth;
-        UpdateHealthUI();
+        curHealth = currentHealth;
+        UpdatePlayerUi(curHealth);
     }
 
-    public void UpdateHealthUI()
+    public void UpdatePlayerUi(float currentHealth)
     {
-        float fillF = frontHealthBar.fillAmount;
-        float fillB = backHealthBar.fillAmount;
-        float hFraction = curHealth / maxHealth;
-        Debug.Log(hFraction);
-        
+
+        Debug.Log(player.stamina);
+
+        fillF = frontHealthBar.fillAmount;
+        fillB = backHealthBar.fillAmount;
+        hFraction = currentHealth / maxHealth;
+
         if (fillB > hFraction)
         {
             frontHealthBar.fillAmount = hFraction;
@@ -46,9 +59,8 @@ public class PlayerUi : MonoBehaviour
             backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
         }
 
-        float fillS = staminaBar.fillAmount;
-
-
+        fillS = staminaBar.fillAmount;
+        staminaBar.fillAmount = player.stamina / player.dashCooldown;
 
     }
 
@@ -56,7 +68,7 @@ public class PlayerUi : MonoBehaviour
     {
         curHealth -= damageAmount;
         curHealth = Mathf.Clamp(curHealth, 0f, maxHealth);
-        UpdateHealthUI();
+        UpdatePlayerUi(curHealth);
     }
 
 
