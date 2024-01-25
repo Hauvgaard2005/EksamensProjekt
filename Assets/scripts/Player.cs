@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     //public Collider2D TerrainCollider;
     public Rigidbody2D rb;
-
+    private HellUpgrader upgradeManager;
     public PlayerUi playerUi;
 
     public HellUpgrader HellUpgrader;
@@ -29,10 +29,10 @@ public class Player : MonoBehaviour
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashSpeed = 10f;
-    [SerializeField] private float dashCooldown;
+    public float dashCooldown;
 
     //current stamina... use for UI?
-    [SerializeField] private float stamina = 3f;
+    public float stamina = 3f;
     bool isDashing;
     UnityEngine.Vector2 moveDir;
 
@@ -58,9 +58,10 @@ public class Player : MonoBehaviour
         Range = 5f;
         reloadSpeed = 2f;
         currentHealth = maxHealth;
-        HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
         rb = GetComponent<Rigidbody2D>();
+        upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
         playerUi.SetHealth(currentHealth);
+
     }
 
 
@@ -129,6 +130,10 @@ public class Player : MonoBehaviour
         {
             SpecialAttack();
         }
+        playerUi.UpdatePlayerUi(currentHealth);
+
+
+
     }
 
     //methods
@@ -223,7 +228,7 @@ public class Player : MonoBehaviour
 
             playerUi.SetHealth(currentHealth);
             StartCoroutine(InvincibilityFrames());
-            playerUi.UpdateHealthUI();
+            playerUi.UpdatePlayerUi(currentHealth);
             playerUi.lerpTimer = 0f;
         }
 

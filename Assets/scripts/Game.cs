@@ -32,6 +32,7 @@ public class Game : MonoBehaviour
     [Header("Upgrades")]
     public float CurrentSoulRange = 5f;
     public GameObject Hell; //Canvas for upgrades
+    public GameObject PlayerUI; //Canvas for PlayerUI
 
     //Wave
     private float hellDuration = 10f;
@@ -67,8 +68,9 @@ public class Game : MonoBehaviour
 
 
         Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
-        
-        print(currentWave);
+
+
+
         SpawnEnemies();
         print(currentWave);
 
@@ -87,7 +89,8 @@ public class Game : MonoBehaviour
             currentWave++;
             hellTimer = 0;
             onEarth = true;
-            Hell.SetActive(false);
+            Hell.SetActive(false); //Canvas for upgrades bliver deaktiveret
+            PlayerUI.SetActive(true); //Canvas for PlayerUI bliver aktiveret igen
             SpawnEnemies();
             pickupTimer = 0;
         }
@@ -106,7 +109,8 @@ public class Game : MonoBehaviour
 
         if (onEarth == false)
         {
-            Hell.SetActive(true);
+            Hell.SetActive(true); //Canvas for upgrades bliver aktiveret
+            PlayerUI.SetActive(false); //Canvas for PlayerUI bliver deaktiveret
 
 
         }

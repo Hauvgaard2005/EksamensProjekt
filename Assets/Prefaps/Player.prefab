@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curHealth: 0
   lerpTimer: 0
-  chipSpeed: 0.5
+  chipSpeed: 20
   maxHealth: 100
   frontHealthBar: {fileID: 0}
   backHealthBar: {fileID: 0}
