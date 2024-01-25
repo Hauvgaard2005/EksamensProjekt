@@ -6,7 +6,7 @@ using System.Timers;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using System.Diagnostics;
-using Microsoft.Unity.VisualStudio.Editor;
+//using Microsoft.Unity.VisualStudio.Editor;
 
 public class Game : MonoBehaviour
 {
