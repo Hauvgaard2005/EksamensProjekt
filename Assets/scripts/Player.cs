@@ -19,12 +19,12 @@ public class Player : MonoBehaviour
     [SerializeField] private Enemy Enemy;
     private bool _invincible = false;
 
-    public Collider2D TerrainCollider = FindObjectOfType<EdgeCollider2D>();
+    //public Collider2D TerrainCollider;
     public Rigidbody2D rb;
 
     public PlayerUi playerUi;
 
-    
+    public HellUpgrader HellUpgrader;
 
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
@@ -57,13 +57,10 @@ public class Player : MonoBehaviour
         damage = 5f;
         Range = 5f;
         reloadSpeed = 2f;
-
         currentHealth = maxHealth;
-        playerUi.SetHealth(currentHealth);
+        HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
         rb = GetComponent<Rigidbody2D>();
-        //upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
-
-
+        playerUi.SetHealth(currentHealth);
     }
 
 
@@ -128,17 +125,9 @@ public class Player : MonoBehaviour
             timer = 0.0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) //&& upgradeManager.curSoul >= specialAttackPrefab.cost)
+        if (Input.GetKeyDown(KeyCode.Space) && HellUpgrader.curSoul >= specialAttackPrefab.cost)
         {
             SpecialAttack();
-        }
-
-
-
-        //stops when colliding with tag water collider
-        if (TerrainCollider.IsTouching(GetComponent<Collider2D>()) == true)
-        {
-            speed = 0f;
         }
     }
 
