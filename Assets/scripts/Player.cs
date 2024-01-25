@@ -19,10 +19,12 @@ public class Player : MonoBehaviour
     [SerializeField] private Enemy Enemy;
     private bool _invincible = false;
 
-
+    //public Collider2D TerrainCollider;
     public Rigidbody2D rb;
-    private HellUpgrader upgradeManager;
-    public PlayerUi healthbar;
+
+    public PlayerUi playerUi;
+
+    public HellUpgrader HellUpgrader;
 
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
@@ -55,19 +57,22 @@ public class Player : MonoBehaviour
         damage = 5f;
         Range = 5f;
         reloadSpeed = 2f;
-
         currentHealth = maxHealth;
-        healthbar.SetHealth(currentHealth);
+        HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
         rb = GetComponent<Rigidbody2D>();
-        upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
-
-
+        playerUi.SetHealth(currentHealth);
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        //midlertidig manuel damage
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            TakeDamage(10f);
+        }
+
         if (isDashing)
         {
             return;
@@ -120,13 +125,10 @@ public class Player : MonoBehaviour
             timer = 0.0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && upgradeManager.curSoul >= specialAttackPrefab.cost)
+        if (Input.GetKeyDown(KeyCode.Space) && HellUpgrader.curSoul >= specialAttackPrefab.cost)
         {
             SpecialAttack();
         }
-
-
-
     }
 
     //methods
@@ -219,8 +221,10 @@ public class Player : MonoBehaviour
             currentHealth -= damageAmount;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            healthbar.SetHealth(currentHealth);
+            playerUi.SetHealth(currentHealth);
             StartCoroutine(InvincibilityFrames());
+            playerUi.UpdateHealthUI();
+            playerUi.lerpTimer = 0f;
         }
 
     }

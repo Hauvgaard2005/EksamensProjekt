@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Minion : Enemy
+public class Sprinter : Enemy
 {
-
-
-
     // Start is called before the first frame update
     void Start()
     {
-        damage = 5f;
-        HP = 15;
-        speed = 2f;
+        damage = 10f;
+        HP = 5f;
+        speed = 4f;
 
     }
 
