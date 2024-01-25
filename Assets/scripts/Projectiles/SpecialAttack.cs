@@ -22,11 +22,11 @@ public class SpecialAttack : MonoBehaviour
     void Start()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(mousePos);
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = (mousePos - (Vector2)transform.position).normalized * speed;
         upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
         upgradeManager.removeSouls(cost);
+        transform.up = mousePos - (Vector2)transform.position;
 
     }
 

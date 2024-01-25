@@ -22,15 +22,15 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D rb;
     private HellUpgrader upgradeManager;
-    public PlayerUi healthbar;
+    public PlayerUi playerUi;
 
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashSpeed = 10f;
-    [SerializeField] private float dashCooldown;
+    public float dashCooldown;
 
     //current stamina... use for UI?
-    [SerializeField] private float stamina = 3f;
+    public float stamina = 3f;
     bool isDashing;
     UnityEngine.Vector2 moveDir;
 
@@ -57,10 +57,9 @@ public class Player : MonoBehaviour
         reloadSpeed = 2f;
 
         currentHealth = maxHealth;
-        healthbar.SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
         upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
-
+        playerUi.SetHealth(currentHealth);
 
     }
 
@@ -68,6 +67,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //midlertidig manuel damage
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            TakeDamage(10f);
+        }
+
         if (isDashing)
         {
             return;
@@ -124,6 +129,7 @@ public class Player : MonoBehaviour
         {
             SpecialAttack();
         }
+        playerUi.UpdatePlayerUi(currentHealth);
 
 
 
@@ -219,8 +225,10 @@ public class Player : MonoBehaviour
             currentHealth -= damageAmount;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            healthbar.SetHealth(currentHealth);
+            playerUi.SetHealth(currentHealth);
             StartCoroutine(InvincibilityFrames());
+            playerUi.UpdatePlayerUi(currentHealth);
+            playerUi.lerpTimer = 0f;
         }
 
     }
