@@ -48,29 +48,26 @@ public class Game : MonoBehaviour
 
     public void Awake()
     {
+        
         if (Instance == null)
         {
             Instance = this;
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-
-    }
-
-    void Start()
-    {
 
         GameObject go = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         SpawnedPlayer = go.GetComponent<Player>();
 
         Camera.main.transform.SetParent(SpawnedPlayer.transform);
+        
+    }
 
-
-        Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
-
-    
+    void Start()
+    {
+        Player player = Instance.SpawnedPlayer.GetComponent<Player>();    
 
         SpawnEnemies();
         print(currentWave);

@@ -25,12 +25,13 @@ public class PlayerUi : MonoBehaviour
 
     public void Start()
     {
+    
         frontHealthBar = GameObject.FindGameObjectWithTag("FrontHealthBar").GetComponent<Image>();
         backHealthBar = GameObject.FindGameObjectWithTag("BackHealthBar").GetComponent<Image>();
         staminaBar = GameObject.FindGameObjectWithTag("StaminaBar").GetComponent<Image>();
         curHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
+        
 
         UpdatePlayerUi(curHealth);
     }
@@ -43,8 +44,8 @@ public class PlayerUi : MonoBehaviour
 
     public void UpdatePlayerUi(float currentHealth)
     {
-        fillF = frontHealthBar.fillAmount;
-        fillB = backHealthBar.fillAmount;
+        //fillF = frontHealthBar.fillAmount;
+        //fillB = backHealthBar.fillAmount;
         hFraction = currentHealth / maxHealth;
 
         if (fillB > hFraction)
@@ -56,8 +57,8 @@ public class PlayerUi : MonoBehaviour
             backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
         }
 
-        fillS = staminaBar.fillAmount;
-        staminaBar.fillAmount = player.stamina / player.dashCooldown;
+        //fillS = staminaBar.fillAmount;
+        //staminaBar.fillAmount = player.stamina / player.dashCooldown;
 
     }
 
