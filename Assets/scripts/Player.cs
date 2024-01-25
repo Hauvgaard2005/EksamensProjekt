@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
 
     //public Collider2D TerrainCollider;
     public Rigidbody2D rb;
-    private HellUpgrader upgradeManager;
     public PlayerUi playerUi;
 
     public HellUpgrader HellUpgrader;
@@ -59,7 +58,7 @@ public class Player : MonoBehaviour
         reloadSpeed = 2f;
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
-        upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
+         HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
         playerUi.SetHealth(currentHealth);
     }
 
