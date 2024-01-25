@@ -57,9 +57,9 @@ public class Player : MonoBehaviour
         reloadSpeed = 2f;
 
         currentHealth = maxHealth;
-        playerUi.SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
         upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
+        playerUi.SetHealth(currentHealth);
 
     }
 
