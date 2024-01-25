@@ -1947,6 +1947,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 574398825}
+  - component: {fileID: 574398826}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -1979,6 +1980,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &574398826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574398824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f9b65608d5f1345bb6a98b8cf5ee91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  curHealth: 0
+  lerpTimer: 0
+  chipSpeed: 20
+  maxHealth: 100
+  maxStamina: 3
+  frontHealthBar: {fileID: 0}
+  backHealthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
 --- !u!224 &575124529 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8488217776254544856, guid: a05b23d56d0fea7418c1275a56822083, type: 3}
@@ -26478,6 +26500,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 5579790997977117761, guid: eea925dadb6ee2747ac56f6af8fd3600, type: 3}
   CurrentSoulRange: 5
   Hell: {fileID: 984658460}
+  PlayerUI: {fileID: 574398824}
   hellTimer: 0
   currentWave: 0
   onEarth: 1

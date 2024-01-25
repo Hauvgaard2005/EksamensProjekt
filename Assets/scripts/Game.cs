@@ -6,6 +6,7 @@ using System.Timers;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using System.Diagnostics;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class Game : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class Game : MonoBehaviour
 
         Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
 
-
+    
 
         SpawnEnemies();
         print(currentWave);
