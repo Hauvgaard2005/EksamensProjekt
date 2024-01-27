@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
          HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
-        playerUi.SetHealth(currentHealth);
+        playerUi.UpdatePlayerUi(currentHealth);
     }
 
 
@@ -224,7 +224,7 @@ public class Player : MonoBehaviour
             currentHealth -= damageAmount;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            playerUi.SetHealth(currentHealth);
+            //playerUi.SetHealth(currentHealth);
             StartCoroutine(InvincibilityFrames());
             playerUi.UpdatePlayerUi(currentHealth);
             playerUi.lerpTimer = 0f;
