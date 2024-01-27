@@ -101,9 +101,10 @@ MonoBehaviour:
   HP: 5
   speed: 2
   damage: 1
-  soulPrefab: {fileID: 0}
+  soulPrefab: {fileID: 1491755151195621230, guid: 045e9db044e55334f8b713a2788e54bc, type: 3}
   Player: {fileID: 5579790997977117761, guid: eea925dadb6ee2747ac56f6af8fd3600, type: 3}
   projectile: {fileID: 8769791837565854637, guid: d6023ca9719f7d042bbc8ff87dd13268, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!61 &2312591109401114332
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129,4 +130,4 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.45, y: 0.3}
-  m_EdgeRadius: 5
+  m_EdgeRadius: 0

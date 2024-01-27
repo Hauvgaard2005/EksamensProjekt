@@ -136,27 +136,37 @@ public class Game : MonoBehaviour
                 break;
             case 4:
                 numberOfMinions = 20;
+                numberOfSprinters = 10;
                 break;
             case 5:
                 numberOfMinions = 25;
+                numberOfSprinters = 12;
                 break;
             case 6:
                 numberOfMinions = 30;
+                numberOfSprinters = 15;
                 break;
             case 7:
                 numberOfMinions = 35;
+                numberOfSprinters = 27;
                 break;
             case 8:
                 numberOfMinions = 40;
+                numberOfSprinters = 30;
                 break;
             case 9:
                 numberOfMinions = 45;
+                numberOfSprinters = 32;
                 break;
             case 10:
                 numberOfMinions = 50;
+                numberOfSprinters = 35;
+                break;
+            case 11:
+                numberOfMinions = 55;
+                numberOfSprinters = 37;
                 break;
         }
-        print(numberOfMinions);
         
         for (int i = 0; i < numberOfMinions; i++)
         {

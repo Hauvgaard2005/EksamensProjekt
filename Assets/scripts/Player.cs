@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         reloadSpeed = 2f;
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
-         HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
+        HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
         playerUi.UpdatePlayerUi(currentHealth);
     }
 
@@ -159,7 +159,8 @@ public class Player : MonoBehaviour
     {
         Projectile projectile = Instantiate(projectilePrefab);
         projectile.transform.position = transform.position;
-
+        //instantiate at y+1
+        
     }
     private void SpecialAttack()
     {
