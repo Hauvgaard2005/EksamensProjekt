@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 2047634914, guid: 6db31d2c00096404981d4671856ecb94, type: 3}
   m_Color: {r: 0.18431373, g: 0.69411767, b: 0.7589115, a: 0.33333334}
   m_FlipX: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48eec0425907324bb6da4e8eec150a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeManager: {fileID: 0}
+  hellUpgrader: {fileID: 0}
 --- !u!95 &5807667566129117052
 Animator:
   serializedVersion: 4

@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using System;
 using UnityEditor;
-using UnityEditor.Callbacks;
+//using UnityEditor.Callbacks;
 using System.Numerics;
 
 public class Player : MonoBehaviour
@@ -19,18 +19,19 @@ public class Player : MonoBehaviour
     [SerializeField] private Enemy Enemy;
     private bool _invincible = false;
 
-
+    //public Collider2D TerrainCollider;
     public Rigidbody2D rb;
-    private HellUpgrader upgradeManager;
-    public PlayerUi healthbar;
+    public PlayerUi playerUi;
+
+    public HellUpgrader HellUpgrader;
 
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashSpeed = 10f;
-    [SerializeField] private float dashCooldown;
+    public float dashCooldown;
 
     //current stamina... use for UI?
-    [SerializeField] private float stamina = 3f;
+    public float stamina = 3f;
     bool isDashing;
     UnityEngine.Vector2 moveDir;
 
@@ -55,19 +56,22 @@ public class Player : MonoBehaviour
         damage = 5f;
         Range = 5f;
         reloadSpeed = 2f;
-
         currentHealth = maxHealth;
-        healthbar.SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
-        upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
-
-
+        HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
+        playerUi.UpdatePlayerUi(currentHealth);
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        //midlertidig manuel damage
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            TakeDamage(10f);
+        }
+
         if (isDashing)
         {
             return;
@@ -120,10 +124,11 @@ public class Player : MonoBehaviour
             timer = 0.0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && upgradeManager.curSoul >= specialAttackPrefab.cost)
+        if (Input.GetKeyDown(KeyCode.Space) && HellUpgrader.curSoul >= specialAttackPrefab.cost)
         {
             SpecialAttack();
         }
+        playerUi.UpdatePlayerUi(currentHealth);
 
 
 
@@ -154,7 +159,8 @@ public class Player : MonoBehaviour
     {
         Projectile projectile = Instantiate(projectilePrefab);
         projectile.transform.position = transform.position;
-
+        //instantiate at y+1
+        
     }
     private void SpecialAttack()
     {
@@ -219,8 +225,10 @@ public class Player : MonoBehaviour
             currentHealth -= damageAmount;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            healthbar.SetHealth(currentHealth);
+            //playerUi.SetHealth(currentHealth);
             StartCoroutine(InvincibilityFrames());
+            playerUi.UpdatePlayerUi(currentHealth);
+            playerUi.lerpTimer = 0f;
         }
 
     }

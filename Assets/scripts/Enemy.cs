@@ -6,18 +6,20 @@ public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public float HP;
-    public float speed = 2;
-    public float damage = 1;
+    public float speed;
+    public float damage;
     public GameObject soulPrefab;
     [SerializeField] private GameObject Player;
     [SerializeField] private Projectile projectile;
 
+    public SpriteRenderer spriteRenderer;
 
 
     public void MoveToPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, Game.Instance.SpawnedPlayer.transform.position, speed * Time.deltaTime);
-        transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
+
+        //transform.up = Game.Instance.SpawnedPlayer.transform.position - transform.position;
     }
 
 
@@ -48,7 +50,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // method triggers on collision//
-
+        public void FlipSprite(){
+    //flips x value of sprite to face player
+        if(transform.position.x > Game.Instance.SpawnedPlayer.transform.position.x)
+        {
+            //if player is to the left, flip sprite
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            //if player is to the right, flip sprite
+            spriteRenderer.flipX = false;
+        }
+        }
 
 }

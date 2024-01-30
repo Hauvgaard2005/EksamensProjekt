@@ -5,6 +5,8 @@ using UnityEngine;
 using System.Timers;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+using System.Diagnostics;
+//using Microsoft.Unity.VisualStudio.Editor;
 
 public class Game : MonoBehaviour
 {
@@ -12,9 +14,11 @@ public class Game : MonoBehaviour
 
     //Enemy Spawner
     [Header("Enemy Spawner")]
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject minionPrefab;
+    [SerializeField] private GameObject sprinterPrefab;
     public Enemy spawnedEnemy;
-    [SerializeField] private int numberOfEnemies = 5;
+    [SerializeField] private int numberOfMinions;
+    [SerializeField] private int numberOfSprinters;
     private float spawnRadius = 100.0f;
     public List<Enemy> enemies = new List<Enemy>();
 
@@ -29,6 +33,7 @@ public class Game : MonoBehaviour
     [Header("Upgrades")]
     public float CurrentSoulRange = 5f;
     public GameObject Hell; //Canvas for upgrades
+    public GameObject PlayerUI; //Canvas for PlayerUI
 
     //Wave
     private float hellDuration = 10f;
@@ -43,31 +48,29 @@ public class Game : MonoBehaviour
 
     public void Awake()
     {
+        
         if (Instance == null)
         {
             Instance = this;
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-
-    }
-
-    void Start()
-    {
 
         GameObject go = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         SpawnedPlayer = go.GetComponent<Player>();
 
         Camera.main.transform.SetParent(SpawnedPlayer.transform);
+        
+    }
 
-
-        Player player = Game.Instance.SpawnedPlayer.GetComponent<Player>();
-
+    void Start()
+    {
+        Player player = Instance.SpawnedPlayer.GetComponent<Player>();    
 
         SpawnEnemies();
-        onEarth = true;
+        print(currentWave);
 
     }
 
@@ -84,7 +87,8 @@ public class Game : MonoBehaviour
             currentWave++;
             hellTimer = 0;
             onEarth = true;
-            Hell.SetActive(false);
+            Hell.SetActive(false); //Canvas for upgrades bliver deaktiveret
+            PlayerUI.SetActive(true); //Canvas for PlayerUI bliver aktiveret igen
             SpawnEnemies();
             pickupTimer = 0;
         }
@@ -103,7 +107,8 @@ public class Game : MonoBehaviour
 
         if (onEarth == false)
         {
-            Hell.SetActive(true);
+            Hell.SetActive(true); //Canvas for upgrades bliver aktiveret
+            PlayerUI.SetActive(false); //Canvas for PlayerUI bliver deaktiveret
 
 
         }
@@ -112,19 +117,81 @@ public class Game : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        numberOfEnemies = currentWave * 2 + 5;
-        for (int i = 0; i < numberOfEnemies; i++)
+        print("spawn enemies function called");
+        switch (currentWave)
+        {
+            case 0:
+                numberOfMinions = 5;
+                break;
+            case 1:
+                numberOfMinions = 7;
+                break;
+            case 2:
+                numberOfMinions = 10;
+                numberOfSprinters = 2;
+                break;
+            case 3:
+                numberOfMinions = 15;
+                numberOfSprinters = 5;
+                break;
+            case 4:
+                numberOfMinions = 20;
+                numberOfSprinters = 10;
+                break;
+            case 5:
+                numberOfMinions = 25;
+                numberOfSprinters = 12;
+                break;
+            case 6:
+                numberOfMinions = 30;
+                numberOfSprinters = 15;
+                break;
+            case 7:
+                numberOfMinions = 35;
+                numberOfSprinters = 27;
+                break;
+            case 8:
+                numberOfMinions = 40;
+                numberOfSprinters = 30;
+                break;
+            case 9:
+                numberOfMinions = 45;
+                numberOfSprinters = 32;
+                break;
+            case 10:
+                numberOfMinions = 50;
+                numberOfSprinters = 35;
+                break;
+            case 11:
+                numberOfMinions = 55;
+                numberOfSprinters = 37;
+                break;
+        }
+        
+        for (int i = 0; i < numberOfMinions; i++)
         {
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
             Vector3 randomSpawnPoint = new Vector3(randomCircle.x, randomCircle.y, 0) + Game.Instance.SpawnedPlayer.transform.position;
 
-            GameObject go2 = Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
-            spawnedEnemy = go2.GetComponent<Enemy>();
+            GameObject go2 = Instantiate(minionPrefab, randomSpawnPoint, Quaternion.identity);
+            spawnedEnemy = go2.GetComponent<Minion>();
+            enemies.Add(spawnedEnemy);
+            print("spawned minion");
+
+        }
+        
+        for (int i = 0; i < numberOfSprinters; i++)
+        {
+            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
+            Vector3 randomSpawnPoint = new Vector3(randomCircle.x, randomCircle.y, 0) + Game.Instance.SpawnedPlayer.transform.position;
+
+            GameObject go2 = Instantiate(sprinterPrefab, randomSpawnPoint, Quaternion.identity);
+            spawnedEnemy = go2.GetComponent<Sprinter>();
             enemies.Add(spawnedEnemy);
 
         }
+        
     }
-
 
     //find nearest enemy//
     public void FindNearestEnemy()
@@ -143,4 +210,4 @@ public class Game : MonoBehaviour
             }
         }
     }
-}
+    }

@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Minion : Enemy
 {
-
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
         damage = 5f;
         HP = 15;
+        speed = 2f;
 
     }
 
@@ -21,6 +22,8 @@ public class Minion : Enemy
     {
         MoveToPlayer();
         Die();
+        FlipSprite();
+        //if enemy collides with terraincollider, ignore it
 
     }
 
