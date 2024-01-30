@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class Sprinter : Enemy
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        damage = 10f;
+        HP = 5f;
+        speed = 4f;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        MoveToPlayer();
+        Die();
+        FlipSprite();
+
+    }
+
+}

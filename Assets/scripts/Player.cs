@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using System;
 using UnityEditor;
-using UnityEditor.Callbacks;
+//using UnityEditor.Callbacks;
 using System.Numerics;
 
 public class Player : MonoBehaviour
@@ -19,10 +19,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Enemy Enemy;
     private bool _invincible = false;
 
-
+    //public Collider2D TerrainCollider;
     public Rigidbody2D rb;
-    private HellUpgrader upgradeManager;
     public PlayerUi playerUi;
+
+    public HellUpgrader HellUpgrader;
 
     [Header("Dash Variables")]
     [SerializeField] private float dashTime = 0.1f;
@@ -55,12 +56,10 @@ public class Player : MonoBehaviour
         damage = 5f;
         Range = 5f;
         reloadSpeed = 2f;
-
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
-        upgradeManager = GameObject.FindObjectOfType<HellUpgrader>();
-        playerUi.SetHealth(currentHealth);
-
+        HellUpgrader = GameObject.FindObjectOfType<HellUpgrader>();
+        playerUi.UpdatePlayerUi(currentHealth);
     }
 
 
@@ -125,7 +124,7 @@ public class Player : MonoBehaviour
             timer = 0.0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && upgradeManager.curSoul >= specialAttackPrefab.cost)
+        if (Input.GetKeyDown(KeyCode.Space) && HellUpgrader.curSoul >= specialAttackPrefab.cost)
         {
             SpecialAttack();
         }
@@ -160,7 +159,8 @@ public class Player : MonoBehaviour
     {
         Projectile projectile = Instantiate(projectilePrefab);
         projectile.transform.position = transform.position;
-
+        //instantiate at y+1
+        
     }
     private void SpecialAttack()
     {
@@ -225,7 +225,7 @@ public class Player : MonoBehaviour
             currentHealth -= damageAmount;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            playerUi.SetHealth(currentHealth);
+            //playerUi.SetHealth(currentHealth);
             StartCoroutine(InvincibilityFrames());
             playerUi.UpdatePlayerUi(currentHealth);
             playerUi.lerpTimer = 0f;
