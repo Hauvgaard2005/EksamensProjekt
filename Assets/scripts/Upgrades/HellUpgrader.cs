@@ -32,7 +32,7 @@ public class HellUpgrader : MonoBehaviour
         SoulTXT.text = "Souls: " + curSoul.ToString();
 
         UpgradeLevels = new int[9];
-        UpgradeCap = new int[] { 10, 3, 5, 5, 1, 3, 3, 5, 3 };
+        UpgradeCap = new int[] { 1, 3, 5, 5, 1, 10, 10, 5, 3 };
 
         UpgradeNames = new string[]
         {
@@ -54,7 +54,7 @@ public class HellUpgrader : MonoBehaviour
            "Increases the range of your Soulzookas AOE",
             "Increases the damage of your Soulzookas AOE",
             "Reduces the time before you can shoot again",
-            "Reduce time before dashing again",
+            "Unlocks the dash ability",
             "Increases the damage of your Fireball",
             "Increases the range your Fireball can travel",
             "Incraeses the range you can collect souls from",
