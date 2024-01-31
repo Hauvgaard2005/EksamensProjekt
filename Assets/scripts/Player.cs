@@ -159,7 +159,8 @@ public class Player : MonoBehaviour
     {
         Projectile projectile = Instantiate(projectilePrefab);
         projectile.transform.position = transform.position;
-        //instantiate at y+1
+        //instantiate at player position with y+1
+        projectile.transform.position = new UnityEngine.Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         
     }
     private void SpecialAttack()
