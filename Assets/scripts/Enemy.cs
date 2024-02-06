@@ -14,6 +14,13 @@ public class Enemy : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
+    
+
+    public void Start()
+    {
+        
+    }
+
 
     public void MoveToPlayer()
     {
@@ -64,4 +71,6 @@ public class Enemy : MonoBehaviour
         }
         }
 
+
+        //ignores collision with terrain
 }
