@@ -9,6 +9,7 @@ TagManager:
   - StaminaBar
   - FrontHealthBar
   - BackHealthBar
+  - HellTimer
   layers:
   - Default
   - TransparentFX
