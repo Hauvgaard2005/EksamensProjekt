@@ -2578,7 +2578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!223 &984658461
 Canvas:
   m_ObjectHideFlags: 0
@@ -26772,6 +26772,7 @@ MonoBehaviour:
   NearestEnemy: {fileID: 0}
   SpawnedPlayer: {fileID: 0}
   playerPrefab: {fileID: 5579790997977117761, guid: eea925dadb6ee2747ac56f6af8fd3600, type: 3}
+  Restart: {fileID: 0}
   CurrentSoulRange: 5
   Hell: {fileID: 984658460}
   PlayerUI: {fileID: 574398824}

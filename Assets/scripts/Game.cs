@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Timers;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
@@ -14,6 +15,8 @@ public class Game : MonoBehaviour
 {
     public static Game Instance;
 
+
+
     //Enemy Spawner
     [Header("Enemy Spawner")]
     [SerializeField] private GameObject minionPrefab;
@@ -23,13 +26,12 @@ public class Game : MonoBehaviour
     [SerializeField] private int numberOfSprinters;
     private float spawnRadius = 100.0f;
     public List<Enemy> enemies = new List<Enemy>();
-
     public GameObject NearestEnemy;
-
-
     public Player SpawnedPlayer;
     public GameObject playerPrefab;
 
+    //Restart 
+    public GameObject Restart;
 
     //upgrades
     [Header("Upgrades")]
@@ -49,7 +51,6 @@ public class Game : MonoBehaviour
 
     public void Awake()
     {
-
         if (Instance == null)
         {
             Instance = this;
@@ -71,6 +72,7 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+
         Hell.SetActive(false); //Canvas for upgrades bliver deaktiveret
 
         SpawnEnemies();
@@ -81,6 +83,13 @@ public class Game : MonoBehaviour
 
     public void Update()
     {
+        if (SpawnedPlayer.currentHealth <= 0f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Destroy(SpawnedPlayer.gameObject);
+        }
+
+
         //Upgrade Wave
         if (onEarth == false)
         {

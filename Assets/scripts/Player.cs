@@ -112,10 +112,6 @@ public class Player : MonoBehaviour
         }
 
         //health
-        if (currentHealth <= 0f)
-        {
-            Destroy(this.gameObject);
-        }
 
         //shooting
         if (timer >= reloadSpeed)
