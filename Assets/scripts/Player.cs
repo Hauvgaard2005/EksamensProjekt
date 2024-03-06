@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashSpeed = 10f;
     public float dashCooldown;
+    public bool canDash = false;
 
     //current stamina... use for UI?
     public float stamina = 3f;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     public float damage;
     public float Range;
     public float reloadSpeed;
+    public bool canBazooka = false;
 
     float timer = 0.0f;
 
@@ -54,7 +56,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         damage = 5f;
-        Range = 5f;
+        Range = 1f;
         reloadSpeed = 2f;
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
@@ -102,7 +104,7 @@ public class Player : MonoBehaviour
 
         //dash
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash == true)
         {
             if (stamina >= dashCooldown)
             {
@@ -120,7 +122,7 @@ public class Player : MonoBehaviour
             timer = 0.0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && HellUpgrader.curSoul >= specialAttackPrefab.cost)
+        if (Input.GetKeyDown(KeyCode.Space) && HellUpgrader.curSoul >= specialAttackPrefab.cost && canBazooka == true)
         {
             SpecialAttack();
         }
