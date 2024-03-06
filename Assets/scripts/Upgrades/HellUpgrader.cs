@@ -32,7 +32,7 @@ public class HellUpgrader : MonoBehaviour
         SoulTXT.text = "Souls: " + curSoul.ToString();
 
         UpgradeLevels = new int[9];
-        UpgradeCap = new int[] { 10, 3, 5, 5, 1, 3, 3, 5, 3 };
+        UpgradeCap = new int[] { 1, 3, 5, 5, 1, 3, 3, 5, 3 };
 
         UpgradeNames = new string[]
         {

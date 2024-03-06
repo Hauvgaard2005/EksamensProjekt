@@ -2,15 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Timers;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using System.Diagnostics;
+using TMPro;
 //using Microsoft.Unity.VisualStudio.Editor;
 
 public class Game : MonoBehaviour
 {
     public static Game Instance;
+
+
 
     //Enemy Spawner
     [Header("Enemy Spawner")]
@@ -21,13 +26,12 @@ public class Game : MonoBehaviour
     [SerializeField] private int numberOfSprinters;
     private float spawnRadius = 100.0f;
     public List<Enemy> enemies = new List<Enemy>();
-
     public GameObject NearestEnemy;
-
-
     public Player SpawnedPlayer;
     public GameObject playerPrefab;
 
+    //Restart 
+    public GameObject Restart;
 
     //upgrades
     [Header("Upgrades")]
@@ -38,17 +42,15 @@ public class Game : MonoBehaviour
     //Wave
     private float hellDuration = 10f;
     [Header("Wave")]
-    public float hellTimer = 0f;
+    public TMP_Text HellTimer; //Visual timer you are in hell
+    public TMP_Text CurrentWave;
     public int currentWave = 0;
     public bool onEarth = true;
     private float pickupDuration = 5f;
     public float pickupTimer = 0f;
 
-
-
     public void Awake()
     {
-        
         if (Instance == null)
         {
             Instance = this;
@@ -61,36 +63,54 @@ public class Game : MonoBehaviour
         GameObject go = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         SpawnedPlayer = go.GetComponent<Player>();
 
+
+        // HellTimer = GameObject. .FindGameObjectWithTag("HellTimer").GetComponent<Text>(); //Finder HellTimer Text
+
         Camera.main.transform.SetParent(SpawnedPlayer.transform);
-        
+
     }
 
     void Start()
     {
-        Player player = Instance.SpawnedPlayer.GetComponent<Player>();    
+
+        Hell.SetActive(false); //Canvas for upgrades bliver deaktiveret
 
         SpawnEnemies();
         print(currentWave);
+        CurrentWave.text = "Wave: " + (currentWave + 1).ToString();
 
     }
 
     public void Update()
     {
+        if (SpawnedPlayer.currentHealth <= 0f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Destroy(SpawnedPlayer.gameObject);
+        }
+
+
         //Upgrade Wave
         if (onEarth == false)
         {
-            hellTimer += Time.deltaTime;
-        }
 
-        if (hellTimer >= hellDuration)
-        {
-            currentWave++;
-            hellTimer = 0;
-            onEarth = true;
-            Hell.SetActive(false); //Canvas for upgrades bliver deaktiveret
-            PlayerUI.SetActive(true); //Canvas for PlayerUI bliver aktiveret igen
-            SpawnEnemies();
-            pickupTimer = 0;
+            if (hellDuration > 0)
+            {
+                hellDuration -= Time.deltaTime;
+                HellTimer.text = "Time left in hell: " + Mathf.Round(hellDuration).ToString();
+            }
+            else
+            {
+                currentWave++;
+                CurrentWave.text = "Wave: " + (currentWave + 1).ToString();
+                hellDuration = 10;
+                onEarth = true;
+                Hell.SetActive(false); //Canvas for upgrades bliver deaktiveret
+                PlayerUI.SetActive(true); //Canvas for PlayerUI bliver aktiveret igen
+                SpawnEnemies();
+                pickupTimer = 0;
+            }
+
         }
 
         //Enemy Spawner
@@ -121,7 +141,7 @@ public class Game : MonoBehaviour
         switch (currentWave)
         {
             case 0:
-                numberOfMinions = 5;
+                numberOfMinions = 1;
                 break;
             case 1:
                 numberOfMinions = 7;
@@ -167,7 +187,7 @@ public class Game : MonoBehaviour
                 numberOfSprinters = 37;
                 break;
         }
-        
+
         for (int i = 0; i < numberOfMinions; i++)
         {
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
@@ -179,7 +199,7 @@ public class Game : MonoBehaviour
             print("spawned minion");
 
         }
-        
+
         for (int i = 0; i < numberOfSprinters; i++)
         {
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
@@ -190,7 +210,7 @@ public class Game : MonoBehaviour
             enemies.Add(spawnedEnemy);
 
         }
-        
+
     }
 
     //find nearest enemy//
@@ -210,4 +230,4 @@ public class Game : MonoBehaviour
             }
         }
     }
-    }
+}
