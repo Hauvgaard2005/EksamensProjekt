@@ -16,7 +16,7 @@ Der må gerne være nogle abilities som du kan unlockes
 |3|Soul|Valutaen som bruges til at opgradere|
 
 ### Player
-Spilleren er et prefab i unity der instantieres af gamecontroller i punkt 0,0,0. Spilleren har to våben. Et standard projektil og et special attack med en AOE effekt. Spilleren har en health og en stamina bar. Når healthbaren rammer 0 dør playeren og spillet genstartes. Stamina bruges til at kunne lave et dash. Dash og Special attack skal dog unlockes i helvede.
+Spilleren er et prefab i unity der instantieres af gamecontroller i punkt 0,0,0. Spilleren har to våben. Et standard projektil og et special attack med e,n AOE effekt. Spilleren har en health og en stamina bar. Når healthbaren rammer 0 dør playeren og spillet genstartes. Stamina bruges til at kunne lave et dash. Dash og Special attack skal dog unlockes i helvede.
 
 ### Projectile
 #### Standard
