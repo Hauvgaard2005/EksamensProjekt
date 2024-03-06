@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8300651568450402574}
   - component: {fileID: 8300651568450402575}
   - component: {fileID: 8300651568450402573}
-  - component: {fileID: -950209567009486643}
   - component: {fileID: 5076816977891994298}
   m_Layer: 0
   m_Name: Minion
@@ -106,27 +105,7 @@ MonoBehaviour:
   Player: {fileID: 5579790997977117761, guid: eea925dadb6ee2747ac56f6af8fd3600, type: 3}
   projectile: {fileID: 8769791837565854637, guid: d6023ca9719f7d042bbc8ff87dd13268, type: 3}
   spriteRenderer: {fileID: 0}
---- !u!50 &-950209567009486643
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8300651568450402610}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  TerrainCollider: {fileID: 0}
 --- !u!61 &5076816977891994298
 BoxCollider2D:
   m_ObjectHideFlags: 0

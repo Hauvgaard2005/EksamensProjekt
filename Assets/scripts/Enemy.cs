@@ -13,12 +13,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Projectile projectile;
 
     public SpriteRenderer spriteRenderer;
-
+    public EdgeCollider2D TerrainCollider;
     
 
     public void Start()
     {
-        
+        TerrainCollider = GameObject.FindGameObjectWithTag("Terrain").GetComponent<EdgeCollider2D>();
+        Physics2D.IgnoreCollision(TerrainCollider, GetComponent<BoxCollider2D>(), true);
     }
 
 

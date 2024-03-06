@@ -10,6 +10,7 @@ TagManager:
   - FrontHealthBar
   - BackHealthBar
   - HellTimer
+  - Terrain
   layers:
   - Default
   - TransparentFX
